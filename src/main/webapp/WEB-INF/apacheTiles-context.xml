@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Resolves Apache Tiles elements (first-order, because InternalResourceViewResolver-->
+    <!-- tries to resolve tiles by himself -->
+    <bean id="titlesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"
+          p:order="1"/>
+
+    <!-- Helper class to configure Tiles 3.x for the Spring Framework -->
+    <!-- See http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/web/servlet/view/tiles2/TilesConfigurer.html -->
+    <!-- The actual tiles templates are in the tiles-definitions.xml  -->
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/view/views.xml</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>

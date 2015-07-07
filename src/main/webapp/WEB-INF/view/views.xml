@@ -1,0 +1,11 @@
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="template" template="/WEB-INF/view/template/template.jsp"> <!-- Generic template -->
+        <put-attribute name="header" value="/WEB-INF/view/tiles/header.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/view/tiles/footer.jsp" />
+    </definition>
+
+    <definition name="index" extends="template"> <!-- Home page template -->
+        <put-attribute name="content" value="/WEB-INF/view/index.jsp" />
+    </definition>
+</tiles-definitions>
