@@ -29,9 +29,6 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    public User() {
-    }
-
     public int getId() {
         return id;
     }
