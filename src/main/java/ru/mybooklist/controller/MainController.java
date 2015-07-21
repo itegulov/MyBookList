@@ -14,4 +14,14 @@ public class MainController {
     public ModelAndView home() {
         return new ModelAndView("index");
     }
+
+    @RequestMapping(value = "/about")
+    public ModelAndView about() {
+        return new ModelAndView("about");
+    }
+
+    @RequestMapping(value = "/contacts")
+    public ModelAndView contacts() {
+        return new ModelAndView("contacts");
+    }
 }

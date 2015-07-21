@@ -3,10 +3,20 @@
     <definition name="template" template="/WEB-INF/view/template/template.jsp"> <!-- Generic template -->
         <put-attribute name="header" value="/WEB-INF/view/tiles/header.jsp" />
         <put-attribute name="footer" value="/WEB-INF/view/tiles/footer.jsp" />
+        <put-attribute name="styles" value="/WEB-INF/view/tiles/styles.jsp" />
     </definition>
 
     <definition name="index" extends="template"> <!-- Home page template -->
         <put-attribute name="content" value="/WEB-INF/view/index.jsp" />
+    </definition>
+
+    <definition name="about" extends="template"> <!-- About page template -->
+        <put-attribute name="content" value="/WEB-INF/view/about.jsp" />
+        <put-attribute name="styles" value="/WEB-INF/view/tiles/styles_about.jsp" />
+    </definition>
+
+    <definition name="contacts" extends="template"> <!-- Contacts page template -->
+        <put-attribute name="content" value="/WEB-INF/view/contacts.jsp" />
     </definition>
 
     <definition name="books/list" extends="template"> <!-- Books' list page template -->
