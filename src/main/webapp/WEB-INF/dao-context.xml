@@ -6,4 +6,8 @@
        <bean id="userDAO" class="ru.mybooklist.dao.UserDAO">
               <constructor-arg name="sessionFactory" ref="sessionFactory"/>
        </bean>
+
+       <bean id="bookDAO" class="ru.mybooklist.dao.BookDAO">
+              <constructor-arg name="sessionFactory" ref="sessionFactory"/>
+       </bean>
 </beans>

@@ -93,7 +93,7 @@
 
     <!-- A lot of Hibernate ORM dependencies -->
     <!-- There are some magic version. Don't know how to get rid of them -->
-    <!-- TODO: fix this strange versions on generic version -->
+    <!-- TODO: fix this strange versions on generic version, but probably it's okay -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator</artifactId>
@@ -150,14 +150,19 @@
       <version>3.1.0</version>
     </dependency>
 
-    <!-- No idea why I do need this -->
+    <!-- For JSP taglibs -->
+    <dependency>
+      <groupId>jstl</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
     <dependency>
       <groupId>javax.servlet.jsp.jstl</groupId>
       <artifactId>jstl-api</artifactId>
       <version>1.2</version>
     </dependency>
 
-    <!--  -->
+    <!-- No idea -->
     <dependency>
       <groupId>commons-fileupload</groupId>
       <artifactId>commons-fileupload</artifactId>
@@ -169,6 +174,18 @@
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>5.1.35</version>
+    </dependency>
+
+    <!-- Need this, because logger needs this -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.12</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.7.12</version>
     </dependency>
   </dependencies>
   <build>

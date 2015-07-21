@@ -8,4 +8,8 @@
     <definition name="index" extends="template"> <!-- Home page template -->
         <put-attribute name="content" value="/WEB-INF/view/index.jsp" />
     </definition>
+
+    <definition name="books/list" extends="template"> <!-- Books' list page template -->
+        <put-attribute name="content" value="/WEB-INF/view/books/list.jsp" />
+    </definition>
 </tiles-definitions>
