@@ -19,7 +19,15 @@
         <put-attribute name="content" value="/WEB-INF/view/contacts.jsp" />
     </definition>
 
+    <definition name="books/not_found" extends="template"> <!-- Book not found page template -->
+        <put-attribute name="content" value="/WEB-INF/view/books/not_found.jsp" />
+    </definition>
+
     <definition name="books/list" extends="template"> <!-- Books' list page template -->
         <put-attribute name="content" value="/WEB-INF/view/books/list.jsp" />
+    </definition>
+
+    <definition name="books/book" extends="template"> <!-- Book info page template -->
+        <put-attribute name="content" value="/WEB-INF/view/books/book.jsp" />
     </definition>
 </tiles-definitions>

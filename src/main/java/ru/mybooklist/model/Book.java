@@ -21,6 +21,9 @@ public class Book {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "image_path")
+    private String imagePath;
+
     @ManyToOne()
     @JoinColumn(name = "author_id")
     private Author author;
@@ -90,5 +93,13 @@ public class Book {
 
     public void setAuthor(Author author) {
         this.author = author;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

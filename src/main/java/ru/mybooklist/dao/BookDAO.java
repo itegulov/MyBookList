@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.mybooklist.model.Book;
+import ru.mybooklist.model.User;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -30,7 +31,17 @@ public class BookDAO {
         currentSession().save(book);
     }
 
+    @SuppressWarnings("unchecked")
     public List<Book> allBooks() {
         return currentSession().createCriteria(Book.class).list();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Book> popularBooks() {
+        return currentSession().createCriteria(Book.class).list();
+    }
+
+    public Book getBookById(int id) {
+        return (Book) currentSession().get(Book.class, id);
     }
 }
