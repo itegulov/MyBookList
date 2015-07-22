@@ -4,10 +4,13 @@
         <put-attribute name="header" value="/WEB-INF/view/tiles/header.jsp" />
         <put-attribute name="footer" value="/WEB-INF/view/tiles/footer.jsp" />
         <put-attribute name="styles" value="/WEB-INF/view/tiles/styles.jsp" />
+        <put-attribute name="scripts" value="/WEB-INF/view/tiles/scripts.jsp" />
     </definition>
 
     <definition name="index" extends="template"> <!-- Home page template -->
         <put-attribute name="content" value="/WEB-INF/view/index.jsp" />
+        <put-attribute name="scripts" value="/WEB-INF/view/tiles/scripts_index.jsp" />
+        <put-attribute name="styles" value="/WEB-INF/view/tiles/styles_index.jsp" />
     </definition>
 
     <definition name="about" extends="template"> <!-- About page template -->

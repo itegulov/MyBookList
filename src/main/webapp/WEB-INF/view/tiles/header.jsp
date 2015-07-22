@@ -17,8 +17,8 @@
                 <li><a href="/contacts">Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href=".">Login</a></li>
-                <li><a href=".">Sign Up</a></li>
+                <li><a href="/user/login">Login</a></li>
+                <li><a href="/user?new">Sign Up</a></li>
             </ul>
         </div>
     </div>
