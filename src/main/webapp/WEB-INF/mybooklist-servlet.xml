@@ -17,7 +17,7 @@
     <!-- Static elements go by themselves, not through dispatcher -->
     <mvc:resources mapping="/res/**" location="/res/"/>
 
-    <!-- Register controllers -->
+    <!-- Register controllers at ru.mybooklist.controller -->
     <context:component-scan base-package="ru.mybooklist.controller.**"/>
 
     <!-- Resolves elements to /WEB-INF/jsp/**.jsp -->

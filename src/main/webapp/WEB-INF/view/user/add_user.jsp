@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,8 +31,8 @@
                 <td><sf:errors path="email" cssClass="error"/></td>
             </tr>
             <tr>
-                <%--<th><sf:label path="avatar">Avatar: </sf:label></th>--%>
-                <%--<td><input type="file" name="avatar"/></td>--%>
+                    <%--<th><sf:label path="avatar">Avatar: </sf:label></th>--%>
+                    <%--<td><input type="file" name="avatar"/></td>--%>
             </tr>
             <tr>
                 <th></th>

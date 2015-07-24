@@ -1,36 +1,37 @@
-<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
     <definition name="template" template="/WEB-INF/view/template/template.jsp"> <!-- Generic template -->
-        <put-attribute name="header" value="/WEB-INF/view/tiles/header.jsp" />
-        <put-attribute name="footer" value="/WEB-INF/view/tiles/footer.jsp" />
-        <put-attribute name="styles" value="/WEB-INF/view/tiles/styles.jsp" />
-        <put-attribute name="scripts" value="/WEB-INF/view/tiles/scripts.jsp" />
+        <put-attribute name="header" value="/WEB-INF/view/tiles/header.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/view/tiles/footer.jsp"/>
+        <put-attribute name="styles" value="/WEB-INF/view/tiles/styles.jsp"/>
+        <put-attribute name="scripts" value="/WEB-INF/view/tiles/scripts.jsp"/>
     </definition>
 
     <definition name="index" extends="template"> <!-- Home page template -->
-        <put-attribute name="content" value="/WEB-INF/view/index.jsp" />
-        <put-attribute name="scripts" value="/WEB-INF/view/tiles/scripts_index.jsp" />
-        <put-attribute name="styles" value="/WEB-INF/view/tiles/styles_index.jsp" />
+        <put-attribute name="content" value="/WEB-INF/view/index.jsp"/>
+        <put-attribute name="scripts" value="/WEB-INF/view/tiles/scripts_index.jsp"/>
+        <put-attribute name="styles" value="/WEB-INF/view/tiles/styles_index.jsp"/>
     </definition>
 
     <definition name="about" extends="template"> <!-- About page template -->
-        <put-attribute name="content" value="/WEB-INF/view/about.jsp" />
-        <put-attribute name="styles" value="/WEB-INF/view/tiles/styles_about.jsp" />
+        <put-attribute name="content" value="/WEB-INF/view/about.jsp"/>
+        <put-attribute name="styles" value="/WEB-INF/view/tiles/styles_about.jsp"/>
     </definition>
 
     <definition name="contacts" extends="template"> <!-- Contacts page template -->
-        <put-attribute name="content" value="/WEB-INF/view/contacts.jsp" />
+        <put-attribute name="content" value="/WEB-INF/view/contacts.jsp"/>
     </definition>
 
     <definition name="books/not_found" extends="template"> <!-- Book not found page template -->
-        <put-attribute name="content" value="/WEB-INF/view/books/not_found.jsp" />
+        <put-attribute name="content" value="/WEB-INF/view/books/not_found.jsp"/>
     </definition>
 
     <definition name="books/list" extends="template"> <!-- Books' list page template -->
-        <put-attribute name="content" value="/WEB-INF/view/books/list.jsp" />
+        <put-attribute name="content" value="/WEB-INF/view/books/list.jsp"/>
     </definition>
 
     <definition name="books/book" extends="template"> <!-- Book info page template -->
-        <put-attribute name="content" value="/WEB-INF/view/books/book.jsp" />
+        <put-attribute name="content" value="/WEB-INF/view/books/book.jsp"/>
     </definition>
 </tiles-definitions>
