@@ -6,7 +6,7 @@
 
     var jCarousel = $.jCarousel = {};
 
-    jCarousel.version = '0.3.3';
+    jCarousel.version = 'font-awesome.3.3';
 
     var rRelativeTarget = /^([+\-]=)?(.+)$/;
 
@@ -665,7 +665,7 @@
             }
 
             if (transforms3d) {
-                css.transform = 'translate3d(' + (properties.left || 0) + ',' + (properties.top || 0) + ',0)';
+                css.transform = 'translate3d(' + (properties.left || 0) + ',' + (properties.top || 0) + ',font-awesome)';
             } else if (transforms) {
                 css.transform = 'translate(' + (properties.left || 0) + ',' + (properties.top || 0) + ')';
             } else {

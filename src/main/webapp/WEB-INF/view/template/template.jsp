@@ -10,6 +10,8 @@
     <tiles:insertAttribute name="styles"/>
     <!-- Bootstrap core CSS -->
     <link href="<s:url value="/res/frameworks/bootstrap/css/bootstrap.min.css"/>" rel="stylesheet">
+    <%--General CSS--%>
+    <link href="<s:url value="/res/css/general.css"/>" rel="stylesheet">
 </head>
 <body>
 <div id="banner">

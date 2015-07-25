@@ -8,30 +8,35 @@
         <put-attribute name="scripts" value="/WEB-INF/view/tiles/scripts.jsp"/>
     </definition>
 
-    <definition name="index" extends="template"> <!-- Home page template -->
+    <definition name="index" extends="template"> <!-- Home page -->
         <put-attribute name="content" value="/WEB-INF/view/index.jsp"/>
         <put-attribute name="scripts" value="/WEB-INF/view/tiles/scripts_index.jsp"/>
         <put-attribute name="styles" value="/WEB-INF/view/tiles/styles_index.jsp"/>
     </definition>
 
-    <definition name="about" extends="template"> <!-- About page template -->
+    <definition name="about" extends="template"> <!-- About page -->
         <put-attribute name="content" value="/WEB-INF/view/about.jsp"/>
         <put-attribute name="styles" value="/WEB-INF/view/tiles/styles_about.jsp"/>
     </definition>
 
-    <definition name="contacts" extends="template"> <!-- Contacts page template -->
+    <definition name="contacts" extends="template"> <!-- Contacts page -->
         <put-attribute name="content" value="/WEB-INF/view/contacts.jsp"/>
     </definition>
 
-    <definition name="books/not_found" extends="template"> <!-- Book not found page template -->
+    <definition name="books/not_found" extends="template"> <!-- Book not found page -->
         <put-attribute name="content" value="/WEB-INF/view/books/not_found.jsp"/>
     </definition>
 
-    <definition name="books/list" extends="template"> <!-- Books' list page template -->
+    <definition name="books/list" extends="template"> <!-- Books' list page -->
         <put-attribute name="content" value="/WEB-INF/view/books/list.jsp"/>
     </definition>
 
-    <definition name="books/book" extends="template"> <!-- Book info page template -->
+    <definition name="books/book" extends="template"> <!-- Book info page -->
         <put-attribute name="content" value="/WEB-INF/view/books/book.jsp"/>
+    </definition>
+
+    <definition name="user/add_user" extends="template"> <!-- User registration template -->
+        <put-attribute name="content" value="/WEB-INF/view/user/add_user.jsp"/>
+        <put-attribute name="styles" value="/WEB-INF/view/tiles/styles_add_user.jsp"/>
     </definition>
 </tiles-definitions>
