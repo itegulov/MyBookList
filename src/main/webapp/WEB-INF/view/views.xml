@@ -37,6 +37,11 @@
 
     <definition name="user/add_user" extends="template"> <!-- User registration template -->
         <put-attribute name="content" value="/WEB-INF/view/user/add_user.jsp"/>
-        <put-attribute name="styles" value="/WEB-INF/view/tiles/styles_add_user.jsp"/>
+        <put-attribute name="styles" value="/WEB-INF/view/tiles/styles_login_page.jsp"/>
+    </definition>
+
+    <definition name="user/login" extends="template"> <!-- User login template -->
+        <put-attribute name="content" value="/WEB-INF/view/user/login.jsp"/>
+        <put-attribute name="styles" value="/WEB-INF/view/tiles/styles_login_page.jsp"/>
     </definition>
 </tiles-definitions>

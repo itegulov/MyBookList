@@ -31,6 +31,12 @@ public class UserController {
         return "user/add_user";
     }
 
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public String loginUser(Model model) {
+        model.addAttribute(new User());
+        return "user/login";
+    }
+
     @RequestMapping(value = "success", method = RequestMethod.GET)
     public String successUser(User user, Model model) {
         model.addAttribute("user", user);
@@ -39,8 +45,8 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST)
     public String addUserFromForm(@Valid @ModelAttribute("user") User user,
-                                        BindingResult bindingResult,
-                                        RedirectAttributes redirect) {
+                                  BindingResult bindingResult,
+                                  RedirectAttributes redirect) {
         if (bindingResult.hasErrors()) {
             return "user/add_user";
         }
