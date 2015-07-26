@@ -35,4 +35,9 @@
     <!-- Helps to maintain multipart requests -->
     <bean id="multipartResolver" class= "org.springframework.web.multipart.commons.CommonsMultipartResolver"
           p:maxUploadSize="500000" />
+
+    <!-- Message source, which defines, that messages.propeties must be used to resolve labels -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages"/>
+    </bean>
 </beans>

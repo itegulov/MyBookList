@@ -32,9 +32,18 @@ public class UserController {
     }
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
-    public String loginUser(Model model) {
-        model.addAttribute(new User());
+    public String loginUser() {
         return "user/login";
+    }
+
+    @RequestMapping(value = "loginfailed", method = RequestMethod.GET)
+    public String loginFailedUser() {
+        return "user/loginfailed";
+    }
+
+    @RequestMapping(value = "logout", method = RequestMethod.GET)
+    public String logoutUser() {
+        return "user/logout";
     }
 
     @RequestMapping(value = "success", method = RequestMethod.GET)
