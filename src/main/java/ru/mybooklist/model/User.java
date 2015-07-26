@@ -29,6 +29,15 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    public User(AuthToken authToken) {
+        name = authToken.getName();
+        password = authToken.getPassword();
+        email = authToken.getEmail();
+    }
+
+    public User() {
+    }
+
     public int getId() {
         return id;
     }

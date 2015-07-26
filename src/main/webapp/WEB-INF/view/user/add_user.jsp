@@ -8,7 +8,7 @@
 
         <div class="row omb_row-sm-offset-3">
             <div class="col-xs-12 col-sm-6">
-                <sf:form modelAttribute="user" method="POST" enctype="multipart/form-data" cssClass="omb_loginForm" autocomplete="false">
+                <sf:form modelAttribute="authtoken" method="POST" enctype="multipart/form-data" cssClass="omb_loginForm" autocomplete="false">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
                         <sf:input path="name" maxlength="15" size="15" cssClass="form-control"/>

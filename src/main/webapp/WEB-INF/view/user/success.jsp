@@ -1,10 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Success</title>
-</head>
-<body>
-Successfully registered ${user.name}
-</body>
-</html>
+<div align="center">
+    We've sent an authentication token on your e-mail address ${authtoken.email}. Please
+    follow instructions, provided by the letter.
+</div>

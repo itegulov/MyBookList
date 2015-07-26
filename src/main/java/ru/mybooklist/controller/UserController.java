@@ -11,10 +11,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import ru.mybooklist.dao.AuthDAO;
 import ru.mybooklist.dao.UserDAO;
+import ru.mybooklist.mail.AuthTokenSender;
+import ru.mybooklist.mail.Mailer;
+import ru.mybooklist.model.AuthToken;
 import ru.mybooklist.model.User;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
+import java.math.BigInteger;
+import java.security.SecureRandom;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Random;
 
 /**
  * @author Daniyar Itegulov
@@ -22,12 +32,16 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("user")
 public class UserController {
+    private Random rnd = new SecureRandom();
+
     @Autowired
     private UserDAO userDAO;
+    @Autowired
+    private AuthDAO authDAO;
 
     @RequestMapping(params = "new", method = RequestMethod.GET)
     public String newUser(Model model) {
-        model.addAttribute(new User());
+        model.addAttribute("authtoken", new AuthToken());
         return "user/add_user";
     }
 
@@ -47,20 +61,37 @@ public class UserController {
     }
 
     @RequestMapping(value = "success", method = RequestMethod.GET)
-    public String successUser(User user, Model model) {
-        model.addAttribute("user", user);
+    public String successUser(@ModelAttribute("authtoken") AuthToken authToken,
+                              Model model) {
+        model.addAttribute("authtoken", authToken);
         return "user/success";
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String addUserFromForm(@Valid @ModelAttribute("user") User user,
+    public String addUserFromForm(@Valid @ModelAttribute("authtoken") AuthToken token,
                                   BindingResult bindingResult,
                                   RedirectAttributes redirect) {
         if (bindingResult.hasErrors()) {
             return "user/add_user";
         }
-        userDAO.addUser(user);
-        redirect.addFlashAttribute("user", user);
+        token.setTimestamp(new Date());
+        token.setToken(new BigInteger(130, rnd).toString(32));
+        authDAO.addToken(token);
+        try {
+            AuthTokenSender.sendAuthToken(token);
+        } catch (MessagingException e) {
+            System.err.println("Couldn't send a mail: " + e);
+        }
+        redirect.addFlashAttribute("authtoken", token);
         return "redirect:user/success";
+    }
+
+    @RequestMapping(value = "confirm", method = RequestMethod.GET)
+    public String confirmRegistration(@RequestParam("token") String token) {
+        AuthToken authToken = authDAO.getByToken(token);
+        User user = new User(authToken);
+        authDAO.deleteToken(authToken);
+        userDAO.addUser(user);
+        return "redirect:/";
     }
 }

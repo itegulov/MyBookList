@@ -44,4 +44,8 @@
         <put-attribute name="content" value="/WEB-INF/view/user/login.jsp"/>
         <put-attribute name="styles" value="/WEB-INF/view/tiles/styles_login_page.jsp"/>
     </definition>
+
+    <definition name="user/success" extends="template"> <!-- User login template -->
+        <put-attribute name="content" value="/WEB-INF/view/user/success.jsp"/>
+    </definition>
 </tiles-definitions>
