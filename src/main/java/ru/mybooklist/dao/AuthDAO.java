@@ -37,9 +37,7 @@ public class AuthDAO {
     }
 
     public AuthToken getByToken(String token) {
-        List<AuthToken> list = currentSession().createCriteria(AuthToken.class)
-                .add(Restrictions.eq("token", token)).list();
-        assert list.size() == 1;
-        return list.get(0);
+        return (AuthToken) currentSession().createCriteria(AuthToken.class)
+                .add(Restrictions.eq("token", token)).uniqueResult();
     }
 }

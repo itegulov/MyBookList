@@ -2,6 +2,7 @@ package ru.mybooklist.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,5 +31,10 @@ public class UserDAO {
 
     public User getUserById(int id) {
         return (User) currentSession().get(User.class, id);
+    }
+
+    public boolean isUsernameAvailable(String name) {
+        return currentSession().createCriteria(User.class)
+                .add(Restrictions.eq("name", name)).list().size() == 0;
     }
 }

@@ -13,6 +13,7 @@
                         <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
                         <sf:input path="name" maxlength="15" size="15" cssClass="form-control"/>
                     </div>
+                    <div class="error" id="usernameError">This username is already taken</div>
                     <sf:errors path="name" cssClass="error"/>
                     <span class="help-block"></span>
 
@@ -36,3 +37,42 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#usernameError').hide();
+
+        // check name availability on focus lost
+        $('#name').blur(function() {
+            checkAvailability(function(result) {
+                if (result) {
+                    $('#usernameError').hide();
+                } else {
+                    $('#usernameError').show();
+                }
+            });
+        });
+
+        $('#authtoken').submit(function(e) {
+            checkAvailability(function(result) {
+                if (result) {
+                    $('#usernameError').hide();
+                } else {
+                    $('#usernameError').show();
+                    e.preventDefault();
+                }
+            });
+        });
+    });
+
+    function checkAvailability(callback) {
+        $.ajax({
+            url: "${pageContext.request.contextPath}/user/is_user_exists?name=" + $('#name').val(),
+            type: 'get',
+            dataType: 'html',
+            async: true,
+            success: function(data) {
+                callback(data === 'true');
+            }
+        });
+    }
+</script>

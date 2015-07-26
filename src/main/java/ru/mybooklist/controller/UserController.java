@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -67,6 +65,11 @@ public class UserController {
         return "user/success";
     }
 
+    @RequestMapping(value = "is_user_exists", method = RequestMethod.GET)
+    public @ResponseBody boolean isUserExists(@RequestParam("name") String name) {
+        return userDAO.isUsernameAvailable(name);
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public String addUserFromForm(@Valid @ModelAttribute("authtoken") AuthToken token,
                                   BindingResult bindingResult,
@@ -75,7 +78,7 @@ public class UserController {
             return "user/add_user";
         }
         token.setTimestamp(new Date());
-        token.setToken(new BigInteger(130, rnd).toString(32));
+        token.setToken(new BigInteger(130, rnd).toString(36));
         authDAO.addToken(token);
         try {
             AuthTokenSender.sendAuthToken(token);
