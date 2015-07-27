@@ -8,17 +8,23 @@
        http://www.springframework.org/schema/security/spring-security.xsd">
 
     <security:http auto-config="true">
-        <security:intercept-url pattern="/books/list" access="ROLE_ADMIN"/>
+        <security:intercept-url pattern="/books/list" access="hasAnyRole('ADMIN')"/>
         <security:form-login login-page="/user/login"
+                             login-processing-url="/login_user"
+                             username-parameter="username"
+                             password-parameter="password"
                              default-target-url="/"
-                             authentication-failure-url="/user/loginfailed"/>
+                             authentication-failure-url="/user/loginfailed"
+                             always-use-default-target='true'/>
         <security:logout logout-success-url="/user/logout"/>
+        <security:remember-me/>
+
     </security:http>
 
     <security:authentication-manager>
         <security:authentication-provider>
             <security:user-service>
-                <security:user name="admin" password="admin" authorities="ROLE_ADMIN"/>
+                <security:user name="admin" password="admin" authorities="ADMIN"/>
             </security:user-service>
         </security:authentication-provider>
     </security:authentication-manager>

@@ -4,15 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.mybooklist.dao.AuthDAO;
 import ru.mybooklist.dao.UserDAO;
 import ru.mybooklist.mail.AuthTokenSender;
-import ru.mybooklist.mail.Mailer;
 import ru.mybooklist.model.AuthToken;
 import ru.mybooklist.model.User;
 
@@ -20,7 +16,6 @@ import javax.mail.MessagingException;
 import javax.validation.Valid;
 import java.math.BigInteger;
 import java.security.SecureRandom;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
