@@ -44,8 +44,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "loginfailed", method = RequestMethod.GET)
-    public String loginFailedUser() {
-        return "user/loginfailed";
+    public String loginFailedUser(Model model) {
+        model.addAttribute("error", "true");
+        return "forward:/user/login";
     }
 
     @RequestMapping(value = "logout", method = RequestMethod.GET)

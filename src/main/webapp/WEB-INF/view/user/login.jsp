@@ -1,12 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <div class="container">
     <div class="omb_login">
         <h3 class="omb_authTitle">Login or <a href="<c:url value="/user?new"/>">Sign up</a></h3>
-        <c:url value="/login_user" var="loginUrl" />
+        <c:url value="/login_user" var="loginUrl"/>
         <div class="row omb_row-sm-offset-3">
             <div class="col-xs-12 col-sm-6">
+                <c:if test='${requestScope.get("error") != null}'>
+                    <p class='error'>
+                        <s:message code="loginPage.form.errorLogin.label"/>
+                    </p>
+                </c:if>
                 <form action="${loginUrl}" method="post" class="omb_loginForm" autocomplete="off">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
