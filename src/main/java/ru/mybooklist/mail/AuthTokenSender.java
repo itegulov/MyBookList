@@ -11,6 +11,6 @@ public enum AuthTokenSender {
     ;
     public static void sendAuthToken(AuthToken token) throws MessagingException {
         Mailer.send(token.getEmail(), "Confirm your registration at MyBookList",
-                "localhost:8080/user/confirm?token=" + token.getToken());
+                "http://localhost:8080/user/confirm?token=" + token.getToken());
     }
 }

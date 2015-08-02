@@ -2,6 +2,7 @@ package ru.mybooklist.model;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
@@ -29,10 +30,15 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    public User(AuthToken authToken) {
+    @ManyToOne()
+    @JoinColumn(name = "role")
+    private Role role;
+
+    public User(AuthToken authToken, Role role) {
         name = authToken.getName();
         password = authToken.getPassword();
         email = authToken.getEmail();
+        this.role = role;
     }
 
     public User() {
@@ -94,5 +100,13 @@ public class User {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

@@ -7,7 +7,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.mybooklist.dao.AuthDAO;
+import ru.mybooklist.dao.RoleDAO;
 import ru.mybooklist.dao.UserDAO;
+import ru.mybooklist.dto.UserDTO;
 import ru.mybooklist.mail.AuthTokenSender;
 import ru.mybooklist.model.AuthToken;
 import ru.mybooklist.model.User;
@@ -31,10 +33,12 @@ public class UserController {
     private UserDAO userDAO;
     @Autowired
     private AuthDAO authDAO;
+    @Autowired
+    private RoleDAO roleDAO;
 
     @RequestMapping(value = "sign_up", method = RequestMethod.GET)
     public String newUser(Model model) {
-        model.addAttribute("authtoken", new AuthToken());
+        model.addAttribute("userDTO", new UserDTO());
         return "user/add_user";
     }
 
@@ -66,13 +70,20 @@ public class UserController {
         return userDAO.isUsernameAvailable(name);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public String addUserFromForm(@Valid @ModelAttribute("authtoken") AuthToken token,
+    @RequestMapping(value = "sign_up", method = RequestMethod.POST)
+    public String addUserFromForm(@Valid @ModelAttribute("userDTO") UserDTO userDTO,
                                   BindingResult bindingResult,
                                   RedirectAttributes redirect) {
+        if (!userDAO.isUsernameAvailable(userDTO.getUsername())) {
+            bindingResult.rejectValue("username", "Username.user.exists");
+        }
+        if (!userDAO.isEmailAvailable(userDTO.getUsername())) {
+            bindingResult.rejectValue("email", "Email.user.exists");
+        }
         if (bindingResult.hasErrors()) {
             return "user/add_user";
         }
+        AuthToken token = new AuthToken(userDTO);
         token.setTimestamp(new Date());
         token.setToken(new BigInteger(130, rnd).toString(36));
         authDAO.addToken(token);
@@ -82,13 +93,13 @@ public class UserController {
             System.err.println("Couldn't send a mail: " + e);
         }
         redirect.addFlashAttribute("authtoken", token);
-        return "redirect:user/success";
+        return "redirect:/user/success";
     }
 
     @RequestMapping(value = "confirm", method = RequestMethod.GET)
     public String confirmRegistration(@RequestParam("token") String token) {
         AuthToken authToken = authDAO.getByToken(token);
-        User user = new User(authToken);
+        User user = new User(authToken, roleDAO.getRole("user"));
         authDAO.deleteToken(authToken);
         userDAO.addUser(user);
         return "redirect:/";

@@ -2,6 +2,7 @@ package ru.mybooklist.model;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+import ru.mybooklist.dto.UserDTO;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
@@ -35,6 +36,16 @@ public class AuthToken {
 
     @Column(name = "timestamp")
     private Date timestamp;
+
+    public AuthToken() {
+
+    }
+
+    public AuthToken(UserDTO userDTO) {
+        name = userDTO.getUsername();
+        password = userDTO.getPassword();
+        email = userDTO.getEmail();
+    }
 
     @Override
     public boolean equals(Object o) {

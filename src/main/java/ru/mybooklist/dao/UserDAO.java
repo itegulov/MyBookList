@@ -37,4 +37,14 @@ public class UserDAO {
         return currentSession().createCriteria(User.class)
                 .add(Restrictions.eq("name", name)).list().size() == 0;
     }
+
+    public boolean isEmailAvailable(String email) {
+        return currentSession().createCriteria(User.class)
+                .add(Restrictions.eq("email", email)).list().size() == 0;
+    }
+
+    public User getUserByUsername(String name) {
+        return (User) currentSession().createCriteria(User.class)
+                .add(Restrictions.eq("name", name)).uniqueResult();
+    }
 }

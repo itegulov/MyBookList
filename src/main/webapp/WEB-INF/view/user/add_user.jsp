@@ -11,13 +11,14 @@
 
         <div class="row omb_row-sm-offset-3">
             <div class="col-xs-12 col-sm-6">
-                <sf:form modelAttribute="authtoken" method="POST" cssClass="omb_loginForm" autocomplete="false">
+                <sf:form modelAttribute="userDTO" method="POST" cssClass="omb_loginForm"
+                         autocomplete="false" enctype="utf8">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
-                        <sf:input path="name" maxlength="15" size="15" cssClass="form-control"/>
+                        <sf:input path="username" maxlength="15" size="15" cssClass="form-control"/>
                     </div>
                     <div class="error" id="usernameError"><s:message code="user.add_user.username_is_taken"/></div>
-                    <sf:errors path="name" cssClass="error"/>
+                    <sf:errors path="username" cssClass="error"/>
                     <span class="help-block"></span>
 
                     <div class="input-group">
@@ -25,6 +26,13 @@
                         <sf:password path="password" size="30" cssClass="form-control"/>
                     </div>
                     <sf:errors path="password" cssClass="error"/>
+                    <span class="help-block"></span>
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
+                        <sf:password path="passwordConfirm" size="30" cssClass="form-control"/>
+                    </div>
+                    <sf:errors cssClass="error" />
                     <span class="help-block"></span>
 
                     <div class="input-group">
