@@ -1,11 +1,6 @@
 package ru.mybooklist.model;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
-import org.springframework.security.core.GrantedAuthority;
-
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
 
 /**
  * @author Daniyar Itegulov
@@ -17,16 +12,12 @@ public class User {
     @Column(name = "id")
     private int id;
 
-    @Pattern(message = "{Pattern.user.name}", regexp="^[a-zA-Z0-9]+$")
-    @Length(message = "{Length.user.name}", min = 3, max=20)
     @Column(name = "name")
     private String name;
 
-    @Length(message = "{Length.user.password}", min = 6, max=20)
     @Column(name = "password")
     private String password;
 
-    @Email(message = "{Email.user.email}")
     @Column(name = "email")
     private String email;
 

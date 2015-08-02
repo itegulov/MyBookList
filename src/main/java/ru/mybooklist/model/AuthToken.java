@@ -21,16 +21,12 @@ public class AuthToken {
     @Column(name = "token")
     private String token;
 
-    @Pattern(message = "{Pattern.user.name}", regexp = "^[a-zA-Z0-9]+$")
-    @Length(message = "{Length.user.name}", min = 3, max = 20)
     @Column(name = "name")
     private String name;
 
-    @Length(message = "{Length.user.password}", min = 6, max = 20)
     @Column(name = "password")
     private String password;
 
-    @Email(message = "{Email.user.email}")
     @Column(name = "email")
     private String email;
 
