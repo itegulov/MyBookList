@@ -1,4 +1,5 @@
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div id="copyright" align="center">
-    MyBookList.net is a property of MyBookList, LLC. &copy;2015 All Rights Reserved.
+    <s:message code="copyright"/>
 </div>

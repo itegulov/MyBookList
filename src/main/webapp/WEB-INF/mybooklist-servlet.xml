@@ -12,7 +12,7 @@
        http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- Enables annotations for Spring MVC -->
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven validator="validator"/>
 
     <!-- Static elements go by themselves, not through dispatcher -->
     <mvc:resources mapping="/res/**" location="/res/"/>
@@ -37,11 +37,18 @@
           p:maxUploadSize="500000" />
 
     <!-- Message source, which defines, that messages.propeties must be used to resolve labels -->
-    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-        <property name="basename" value="messages"/>
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <!--suppress SpringModelInspection -->
+        <property name="basename" value="classpath:generalMessages"/>
+        <property name="defaultEncoding" value="UTF-8"/>
     </bean>
-    
+
     <mvc:interceptors>
+        <!-- Logs performance data -->
         <bean class="ru.mybooklist.interceptor.PerformanceMonitorInterceptor"/>
+        <!-- Localizes text for end-user -->
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" p:paramName="language"/>
     </mvc:interceptors>
+
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" p:defaultLocale="en"/>
 </beans>

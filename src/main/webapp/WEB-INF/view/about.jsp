@@ -9,8 +9,7 @@
                 <li>Github: <a href="https://github.com/itegulov">itegulov</a><br></li>
                 <li>Twitter: <a href="https://twitter.com/wibkwibk">@wibkwibk</a><br></li>
             </ul>
-            <p>I am an amateur software developer, based in Saint-Petersburg. Currently I'm a student of
-                ITMO University and just trying to survive in this cruel world</p>
+            <p><s:message code="aboutPage.my.description.label"/></p>
         </div>
     </div>
 </div>

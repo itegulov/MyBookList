@@ -32,7 +32,7 @@ public class UserController {
     @Autowired
     private AuthDAO authDAO;
 
-    @RequestMapping(params = "new", method = RequestMethod.GET)
+    @RequestMapping(value = "sign_up", method = RequestMethod.GET)
     public String newUser(Model model) {
         model.addAttribute("authtoken", new AuthToken());
         return "user/add_user";
