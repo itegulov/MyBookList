@@ -74,6 +74,11 @@
                 }
             });
         });
+
+        $('#username').watermark('Username');
+        $('#password').watermark('Password');
+        $('#passwordConfirm').watermark('Confirm password');
+        $('#email').watermark('E-mail')
     });
 
     function checkAvailability(callback) {

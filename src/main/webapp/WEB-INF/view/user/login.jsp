@@ -18,13 +18,13 @@
                 <form action="${loginUrl}" method="post" class="omb_loginForm" autocomplete="off">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
-                        <input name="username" type="text" maxlength="15" size="15" class="form-control"/>
+                        <input id="username" name="username" type="text" maxlength="15" size="15" class="form-control" title="username"/>
                     </div>
                     <span class="help-block"></span>
 
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
-                        <input name="password" type="password" maxlength="30" class="form-control"/>
+                        <input id="password" name="password" type="password" maxlength="30" class="form-control" title="username"/>
                     </div>
                     <span class="help-block"></span>
 
@@ -36,3 +36,9 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $('#username').watermark('Username');
+        $('#password').watermark('Password');
+    });
+</script>
