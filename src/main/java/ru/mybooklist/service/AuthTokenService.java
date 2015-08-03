@@ -1,6 +1,8 @@
 package ru.mybooklist.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.mybooklist.dao.AuthDAO;
@@ -29,9 +31,12 @@ public class AuthTokenService {
     @Autowired
     private RoleDAO roleDAO;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     private final static Random rnd = new SecureRandom();
 
-    public void confrimRegistration(String token) {
+    public void confirmRegistration(String token) {
         AuthToken authToken = authDAO.getByToken(token);
         User user = new User(authToken, roleDAO.getRole("user"));
         authDAO.deleteToken(authToken);
@@ -39,7 +44,7 @@ public class AuthTokenService {
     }
 
     public AuthToken sendToken(UserDTO userDTO) {
-        AuthToken token = new AuthToken(userDTO);
+        AuthToken token = new AuthToken(userDTO, passwordEncoder);
         token.setTimestamp(new Date());
         token.setToken(new BigInteger(130, rnd).toString(36));
         authDAO.addToken(token);

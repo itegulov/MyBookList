@@ -6,21 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import ru.mybooklist.dao.AuthDAO;
-import ru.mybooklist.dao.RoleDAO;
 import ru.mybooklist.dao.UserDAO;
 import ru.mybooklist.dto.UserDTO;
-import ru.mybooklist.mail.AuthTokenSender;
 import ru.mybooklist.model.AuthToken;
-import ru.mybooklist.model.User;
 import ru.mybooklist.service.AuthTokenService;
 
-import javax.mail.MessagingException;
 import javax.validation.Valid;
-import java.math.BigInteger;
-import java.security.SecureRandom;
-import java.util.Date;
-import java.util.Random;
 
 /**
  * @author Daniyar Itegulov
@@ -82,7 +73,7 @@ public class UserController {
 
     @RequestMapping(value = "confirm", method = RequestMethod.GET)
     public String confirmRegistration(@RequestParam("token") String token) {
-        authTokenService.confrimRegistration(token);
+        authTokenService.confirmRegistration(token);
         return "redirect:/";
     }
 }

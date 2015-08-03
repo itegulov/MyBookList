@@ -2,6 +2,7 @@ package ru.mybooklist.model;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.mybooklist.dto.UserDTO;
 
 import javax.persistence.*;
@@ -37,9 +38,9 @@ public class AuthToken {
 
     }
 
-    public AuthToken(UserDTO userDTO) {
+    public AuthToken(UserDTO userDTO, PasswordEncoder passwordEncoder) {
         name = userDTO.getUsername();
-        password = userDTO.getPassword();
+        password = passwordEncoder.encode(userDTO.getPassword());
         email = userDTO.getEmail();
     }
 
