@@ -22,26 +22,15 @@ public class AuthToken {
     @Column(name = "token", unique = true, nullable = false)
     private String token;
 
-    @Column(name = "name", unique = true, nullable = false)
-    private String name;
-
-    @Column(name = "password", nullable = false)
-    private String password;
-
-    @Column(name = "email", unique = true, nullable = false)
-    private String email;
+    @ManyToOne()
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(name = "timestamp", nullable = false)
     private Date timestamp;
 
     public AuthToken() {
 
-    }
-
-    public AuthToken(UserDTO userDTO, PasswordEncoder passwordEncoder) {
-        name = userDTO.getUsername();
-        password = passwordEncoder.encode(userDTO.getPassword());
-        email = userDTO.getEmail();
     }
 
     @Override
@@ -64,9 +53,6 @@ public class AuthToken {
         return "AuthToken{" +
                 "id=" + id +
                 ", token='" + token + '\'' +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
                 ", timestamp=" + timestamp +
                 '}';
     }
@@ -87,35 +73,19 @@ public class AuthToken {
         this.token = token;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public Date getTimestamp() {
         return timestamp;
     }
 
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

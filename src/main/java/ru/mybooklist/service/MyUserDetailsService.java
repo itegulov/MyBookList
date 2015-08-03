@@ -23,6 +23,8 @@ public class MyUserDetailsService implements UserDetailsService {
         User user = userDAO.getUserByUsername(s);
         if (user == null) {
             throw new UsernameNotFoundException("No user found with username: " + s);
+        } else if (!user.isConfirmed()) {
+            throw new UsernameNotFoundException("User " + s + " isn't confirmed");
         }
         return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(),
                 true, true, true, true, Collections.singletonList(user.getRole()));

@@ -9,8 +9,8 @@ import javax.mail.MessagingException;
  */
 public enum AuthTokenSender {
     ;
-    public static void sendAuthToken(AuthToken token) throws MessagingException {
-        Mailer.send(token.getEmail(), "Confirm your registration at MyBookList",
+    public static void sendAuthToken(String email, AuthToken token) throws MessagingException {
+        Mailer.send(email, "Confirm your registration at MyBookList",
                 "http://localhost:8080/user/confirm?token=" + token.getToken());
     }
 }

@@ -1,5 +1,8 @@
 package ru.mybooklist.model;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+import ru.mybooklist.dto.UserDTO;
+
 import javax.persistence.*;
 
 /**
@@ -25,14 +28,17 @@ public class User {
     @JoinColumn(name = "role", nullable = false)
     private Role role;
 
-    public User(AuthToken authToken, Role role) {
-        name = authToken.getName();
-        password = authToken.getPassword();
-        email = authToken.getEmail();
-        this.role = role;
-    }
+    @Column(name = "confirmed", nullable = false)
+    private boolean confirmed = false;
 
     public User() {
+    }
+
+    public User(UserDTO userDTO, Role role, PasswordEncoder passwordEncoder) {
+        name = userDTO.getUsername();
+        password = passwordEncoder.encode(userDTO.getPassword());
+        email = userDTO.getEmail();
+        this.role = role;
     }
 
     public int getId() {
@@ -99,5 +105,13 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public boolean isConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        this.confirmed = confirmed;
     }
 }

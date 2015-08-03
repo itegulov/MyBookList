@@ -1,10 +1,8 @@
 package ru.mybooklist.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.mybooklist.dao.AuthDAO;
 import ru.mybooklist.dao.RoleDAO;
 import ru.mybooklist.dao.UserDAO;
@@ -38,18 +36,21 @@ public class AuthTokenService {
 
     public void confirmRegistration(String token) {
         AuthToken authToken = authDAO.getByToken(token);
-        User user = new User(authToken, roleDAO.getRole("user"));
+        authToken.getUser().setConfirmed(true);
         authDAO.deleteToken(authToken);
-        userDAO.addUser(user);
+        userDAO.updateUser(authToken.getUser());
     }
 
     public AuthToken sendToken(UserDTO userDTO) {
-        AuthToken token = new AuthToken(userDTO, passwordEncoder);
+        User user = new User(userDTO, roleDAO.getRole("user"), passwordEncoder);
+        userDAO.addUser(user);
+        AuthToken token = new AuthToken();
         token.setTimestamp(new Date());
         token.setToken(new BigInteger(130, rnd).toString(36));
+        token.setUser(user);
         authDAO.addToken(token);
         try {
-            AuthTokenSender.sendAuthToken(token);
+            AuthTokenSender.sendAuthToken(user.getEmail(), token);
         } catch (MessagingException e) {
             System.err.println("Couldn't send a mail: " + e);
             throw new IllegalStateException(e);

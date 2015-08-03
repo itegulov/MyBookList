@@ -47,4 +47,8 @@ public class UserDAO {
         return (User) currentSession().createCriteria(User.class)
                 .add(Restrictions.eq("name", name)).uniqueResult();
     }
+
+    public void updateUser(User user) {
+        currentSession().update(user);
+    }
 }
