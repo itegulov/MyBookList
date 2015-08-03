@@ -6,23 +6,23 @@ import javax.persistence.*;
  * @author Daniyar Itegulov
  */
 @Entity
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = {"name", "email"}))
 public class User {
     @Id @GeneratedValue
-    @Column(name = "id")
+    @Column(name = "id", unique = true, nullable = false)
     private int id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
     @ManyToOne()
-    @JoinColumn(name = "role")
+    @JoinColumn(name = "role", nullable = false)
     private Role role;
 
     public User(AuthToken authToken, Role role) {

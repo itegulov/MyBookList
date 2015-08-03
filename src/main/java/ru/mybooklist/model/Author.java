@@ -9,13 +9,13 @@ import javax.persistence.*;
 @Table(name = "authors")
 public class Author {
     @Id @GeneratedValue
-    @Column(name = "id")
+    @Column(name = "id", unique = true, nullable = false)
     private int id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "family")
+    @Column(name = "family", nullable = false)
     private String family;
 
     public int getId() {

@@ -6,26 +6,26 @@ import javax.persistence.*;
  * @author Daniyar Itegulov
  */
 @Entity
-@Table(name = "books")
+@Table(name = "books", uniqueConstraints = @UniqueConstraint(columnNames = {"ISBN"}))
 public class Book {
     @Id @GeneratedValue
-    @Column(name = "id")
+    @Column(name = "id", unique = true, nullable = false)
     private int id;
 
-    @Column(name = "ISBN")
+    @Column(name = "ISBN", unique = true)
     private String ISBN;
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "image_path")
+    @Column(name = "image_path", nullable = false)
     private String imagePath;
 
     @ManyToOne()
-    @JoinColumn(name = "author_id")
+    @JoinColumn(name = "author_id", nullable = false)
     private Author author;
 
     @Override

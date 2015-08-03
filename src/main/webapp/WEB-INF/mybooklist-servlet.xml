@@ -20,6 +20,12 @@
     <!-- Register controllers at ru.mybooklist.controller -->
     <context:component-scan base-package="ru.mybooklist.controller.**"/>
 
+    <!-- Register services at ru.mybooklist.service -->
+    <context:component-scan base-package="ru.mybooklist.service.**"/>
+
+    <!-- Register constraint validators at ru.mybooklist.service -->
+    <context:component-scan base-package="ru.mybooklist.validation.validator.**"/>
+
     <!-- Resolves elements to /WEB-INF/jsp/**.jsp -->
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"

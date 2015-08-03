@@ -13,6 +13,7 @@ import ru.mybooklist.dto.UserDTO;
 import ru.mybooklist.mail.AuthTokenSender;
 import ru.mybooklist.model.AuthToken;
 import ru.mybooklist.model.User;
+import ru.mybooklist.service.AuthTokenService;
 
 import javax.mail.MessagingException;
 import javax.validation.Valid;
@@ -24,17 +25,14 @@ import java.util.Random;
 /**
  * @author Daniyar Itegulov
  */
+//TODO: move all login and signUp action to separate controllers
 @Controller
 @RequestMapping("user")
 public class UserController {
-    private Random rnd = new SecureRandom();
-
     @Autowired
     private UserDAO userDAO;
     @Autowired
-    private AuthDAO authDAO;
-    @Autowired
-    private RoleDAO roleDAO;
+    private AuthTokenService authTokenService;
 
     @RequestMapping(value = "sign_up", method = RequestMethod.GET)
     public String newUser(Model model) {
@@ -74,34 +72,17 @@ public class UserController {
     public String addUserFromForm(@Valid @ModelAttribute("userDTO") UserDTO userDTO,
                                   BindingResult bindingResult,
                                   RedirectAttributes redirect) {
-        if (!userDAO.isUsernameAvailable(userDTO.getUsername())) {
-            bindingResult.rejectValue("username", "Username.user.exists");
-        }
-        if (!userDAO.isEmailAvailable(userDTO.getUsername())) {
-            bindingResult.rejectValue("email", "Email.user.exists");
-        }
         if (bindingResult.hasErrors()) {
             return "user/add_user";
         }
-        AuthToken token = new AuthToken(userDTO);
-        token.setTimestamp(new Date());
-        token.setToken(new BigInteger(130, rnd).toString(36));
-        authDAO.addToken(token);
-        try {
-            AuthTokenSender.sendAuthToken(token);
-        } catch (MessagingException e) {
-            System.err.println("Couldn't send a mail: " + e);
-        }
+        AuthToken token = authTokenService.sendToken(userDTO);
         redirect.addFlashAttribute("authtoken", token);
         return "redirect:/user/success";
     }
 
     @RequestMapping(value = "confirm", method = RequestMethod.GET)
     public String confirmRegistration(@RequestParam("token") String token) {
-        AuthToken authToken = authDAO.getByToken(token);
-        User user = new User(authToken, roleDAO.getRole("user"));
-        authDAO.deleteToken(authToken);
-        userDAO.addUser(user);
+        authTokenService.confrimRegistration(token);
         return "redirect:/";
     }
 }
