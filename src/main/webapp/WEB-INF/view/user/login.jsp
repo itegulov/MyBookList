@@ -15,6 +15,25 @@
                         <s:message code="loginPage.form.errorLogin.label"/>
                     </p>
                 </c:if>
+                <c:if test="${param.error != null}">
+                    <c:choose>
+                        <c:when test="${SPRING_SECURITY_LAST_EXCEPTION.message == 'User is disabled'}">
+                            <div class="alert alert-error">
+                                <s:message code="authToken.invalid"/>
+                            </div>
+                        </c:when>
+                        <c:when test="${SPRING_SECURITY_LAST_EXCEPTION.message == 'User account has expired'}">
+                            <div class="alert alert-error">
+                                <s:message code="authToken.invalid"/>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="alert alert-error">
+                                <s:message code="loginPage.form.errorLogin.label"/>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+                </c:if>
                 <form action="${loginUrl}" method="post" class="omb_loginForm" autocomplete="off">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>

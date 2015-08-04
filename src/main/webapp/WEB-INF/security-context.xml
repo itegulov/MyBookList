@@ -8,7 +8,19 @@
        http://www.springframework.org/schema/security/spring-security.xsd">
 
     <security:http auto-config="true">
-        <security:intercept-url pattern="/books/list" access="hasAnyRole('ADMIN')"/>
+        <security:intercept-url pattern="/user/login" access="isAnonymous()"/>
+        <security:intercept-url pattern="/user/sign_up" access="isAnonymous()"/>
+        <security:intercept-url pattern="/user/success" access="permitAll"/>
+        <security:intercept-url pattern="/user/email_error" access="permitAll"/>
+        <security:intercept-url pattern="/user/bad_token" access="permitAll"/>
+        <security:intercept-url pattern="/user/confirm" access="permitAll"/>
+        <security:intercept-url pattern="/about" access="permitAll"/>
+        <security:intercept-url pattern="/contacts" access="permitAll"/>
+        <security:intercept-url pattern="/" access="permitAll"/>
+        <security:intercept-url pattern="/res/**" access="permitAll"/>
+        <security:intercept-url pattern="/books/list" access="hasAnyRole('admin')"/>
+        <security:intercept-url pattern="/**" access="isAuthenticated()"/>
+
         <security:form-login login-page="/user/login"
                              login-processing-url="/login_user"
                              username-parameter="username"

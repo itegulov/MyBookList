@@ -47,6 +47,10 @@
         <put-attribute name="styles" value="/WEB-INF/view/tiles/styles_login_page.jsp"/>
     </definition>
 
+    <definition name="user/logout" extends="template"> <!-- User logout -->
+        <put-attribute name="content" value="/WEB-INF/view/user/logout.jsp"/>
+    </definition>
+
     <definition name="user/success" extends="template"> <!-- User login success -->
         <put-attribute name="content" value="/WEB-INF/view/user/success.jsp"/>
     </definition>
