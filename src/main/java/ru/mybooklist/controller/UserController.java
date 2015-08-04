@@ -27,22 +27,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "login", method = RequestMethod.GET)
-    public String loginUser() {
-        return "user/login";
-    }
-
-    @RequestMapping(value = "loginfailed", method = RequestMethod.GET)
-    public String loginFailedUser(Model model) {
-        model.addAttribute("error", "true");
-        return "forward:/user/login";
-    }
-
-    @RequestMapping(value = "logout", method = RequestMethod.GET)
-    public String logoutUser() {
-        return "user/logout";
-    }
-
     @RequestMapping(value = "is_user_exists", method = RequestMethod.GET)
     public @ResponseBody boolean isUserExists(@RequestParam("name") String name) {
         return userService.isUsernameAvailable(name);

@@ -13,6 +13,4 @@
         <spring:message code="message.logoutSucc"/>
     </div>
 </c:if>
-<body>
 <a href="<c:url value="/user/login"/>">Login</a>
-</body>

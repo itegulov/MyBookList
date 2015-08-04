@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -19,8 +20,13 @@
                 <li><a href="<c:url value="/contacts"/>"><s:message code="header.contacts"/></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="<c:url value="/user/login"/>"><s:message code="user.add_user.login"/></a></li>
-                <li><a href="<c:url value="/user/sign_up"/>"><s:message code="user.add_user.sign_up"/></a></li>
+                <sec:authorize access="isAnonymous()">
+                    <li><a href="<c:url value="/user/login"/>"><s:message code="user.add_user.login"/></a></li>
+                    <li><a href="<c:url value="/user/sign_up"/>"><s:message code="user.add_user.sign_up"/></a></li>
+                </sec:authorize>
+                <sec:authorize access="isAuthenticated()">
+                    <li><a href="<c:url value="/user/logout"/>"><s:message code="user.logout"/></a></li>
+                </sec:authorize>
                 <li><a href="?language=en"><img src="<c:url value="/res/images/flags/en.png"/>"/></a></li>
                 <li><a href="?language=ru"><img src="<c:url value="/res/images/flags/ru.png"/>"/></a></li>
             </ul>

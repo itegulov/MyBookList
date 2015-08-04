@@ -54,7 +54,7 @@
 
     <mvc:interceptors>
         <!-- Logs performance data -->
-        <bean class="ru.mybooklist.interceptor.PerformanceMonitorInterceptor"/>
+        <!--<bean class="ru.mybooklist.interceptor.PerformanceMonitorInterceptor"/>-->
         <!-- Localizes text for end-user -->
         <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" p:paramName="language"/>
     </mvc:interceptors>
