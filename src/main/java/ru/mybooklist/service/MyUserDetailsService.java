@@ -27,6 +27,6 @@ public class MyUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("User " + s + " isn't confirmed");
         }
         return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(),
-                true, true, true, true, Collections.singletonList(user.getRole()));
+                user.isConfirmed(), true, true, true, Collections.singletonList(user.getRole()));
     }
 }

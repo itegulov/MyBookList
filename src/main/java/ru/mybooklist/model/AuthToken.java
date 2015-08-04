@@ -1,12 +1,7 @@
 package ru.mybooklist.model;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import ru.mybooklist.dto.UserDTO;
-
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -15,6 +10,7 @@ import java.util.Date;
 @Entity
 @Table(name = "authtokens")
 public class AuthToken {
+    private static final int EXPIRE_TIME = 60 * 24;
     @Id @GeneratedValue
     @Column(name = "id", unique = true, nullable = false)
     private int id;
@@ -87,5 +83,12 @@ public class AuthToken {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Date getExpiryDate() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(timestamp);
+        cal.add(Calendar.MINUTE, EXPIRE_TIME);
+        return (Date) cal.getTime().clone();
     }
 }

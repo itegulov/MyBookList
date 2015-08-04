@@ -1,8 +1,7 @@
-package ru.mybooklist.dto;
+package ru.mybooklist.model.dto;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
 import ru.mybooklist.validation.EmailIsUnique;
 import ru.mybooklist.validation.PasswordMatches;
 import ru.mybooklist.validation.UsernameIsUnique;

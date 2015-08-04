@@ -1,17 +1,22 @@
 package ru.mybooklist.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.mybooklist.dao.UserDAO;
-import ru.mybooklist.dto.UserDTO;
+import ru.mybooklist.event.OnRegistrationCompleteEvent;
+import ru.mybooklist.model.User;
+import ru.mybooklist.model.dto.UserDTO;
 import ru.mybooklist.model.AuthToken;
-import ru.mybooklist.service.AuthTokenService;
+import ru.mybooklist.service.UserService;
 
 import javax.validation.Valid;
+import java.util.Calendar;
 
 /**
  * @author Daniyar Itegulov
@@ -21,9 +26,10 @@ import javax.validation.Valid;
 @RequestMapping("user")
 public class UserController {
     @Autowired
-    private UserDAO userDAO;
+    private UserService userService;
+
     @Autowired
-    private AuthTokenService authTokenService;
+    ApplicationEventPublisher eventPublisher;
 
     @RequestMapping(value = "sign_up", method = RequestMethod.GET)
     public String newUser(Model model) {
@@ -56,24 +62,44 @@ public class UserController {
 
     @RequestMapping(value = "is_user_exists", method = RequestMethod.GET)
     public @ResponseBody boolean isUserExists(@RequestParam("name") String name) {
-        return userDAO.isUsernameAvailable(name);
+        return userService.isUsernameAvailable(name);
     }
 
     @RequestMapping(value = "sign_up", method = RequestMethod.POST)
     public String addUserFromForm(@Valid @ModelAttribute("userDTO") UserDTO userDTO,
                                   BindingResult bindingResult,
-                                  RedirectAttributes redirect) {
+                                  RedirectAttributes redirect,
+                                  WebRequest request) {
         if (bindingResult.hasErrors()) {
             return "user/add_user";
         }
-        AuthToken token = authTokenService.sendToken(userDTO);
-        redirect.addFlashAttribute("authtoken", token);
+        User user = userService.registerUser(userDTO);
+        try {
+            eventPublisher.publishEvent(
+                    new OnRegistrationCompleteEvent(user, request.getLocale(), request.getContextPath()));
+        } catch (Exception e) {
+            return "user/email_error";
+        }
+
         return "redirect:/user/success";
     }
 
     @RequestMapping(value = "confirm", method = RequestMethod.GET)
     public String confirmRegistration(@RequestParam("token") String token) {
-        authTokenService.confirmRegistration(token);
+        AuthToken authToken = userService.getAuthenticationToken(token);
+        if (authToken == null) {
+            return "redirect:/user/bad_token";
+        }
+
+        User user = authToken.getUser();
+        Calendar cal = Calendar.getInstance();
+        if ((authToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
+            userService.deleteToken(authToken);
+            return "redirect:/user/bad_token";
+        }
+
+        userService.confirmUser(user);
+        userService.deleteToken(authToken);
         return "redirect:/";
     }
 }

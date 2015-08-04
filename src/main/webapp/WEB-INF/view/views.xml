@@ -35,19 +35,27 @@
         <put-attribute name="content" value="/WEB-INF/view/books/book.jsp"/>
     </definition>
 
-    <definition name="user/add_user" extends="template"> <!-- User registration template -->
+    <definition name="user/add_user" extends="template"> <!-- User registration -->
         <put-attribute name="content" value="/WEB-INF/view/user/add_user.jsp"/>
         <put-attribute name="scripts" value="/WEB-INF/view/tiles/scripts_add_user.jsp"/>
         <put-attribute name="styles" value="/WEB-INF/view/tiles/styles_login_page.jsp"/>
     </definition>
 
-    <definition name="user/login" extends="template"> <!-- User login template -->
+    <definition name="user/login" extends="template"> <!-- User login -->
         <put-attribute name="content" value="/WEB-INF/view/user/login.jsp"/>
         <put-attribute name="scripts" value="/WEB-INF/view/tiles/scripts_login.jsp"/>
         <put-attribute name="styles" value="/WEB-INF/view/tiles/styles_login_page.jsp"/>
     </definition>
 
-    <definition name="user/success" extends="template"> <!-- User login template -->
+    <definition name="user/success" extends="template"> <!-- User login success -->
         <put-attribute name="content" value="/WEB-INF/view/user/success.jsp"/>
+    </definition>
+
+    <definition name="user/bad_token" extends="template"> <!-- User invalid authentication token -->
+        <put-attribute name="content" value="/WEB-INF/view/user/bad_token.jsp"/>
+    </definition>
+
+    <definition name="user/email_error" extends="template"> <!-- User couldn't send email -->
+        <put-attribute name="content" value="/WEB-INF/view/user/email_error.jsp"/>
     </definition>
 </tiles-definitions>

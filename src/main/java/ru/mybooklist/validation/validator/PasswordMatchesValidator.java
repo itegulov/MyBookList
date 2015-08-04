@@ -1,6 +1,6 @@
 package ru.mybooklist.validation.validator;
 
-import ru.mybooklist.dto.UserDTO;
+import ru.mybooklist.model.dto.UserDTO;
 import ru.mybooklist.validation.PasswordMatches;
 
 import javax.validation.ConstraintValidator;

@@ -26,6 +26,9 @@
     <!-- Register constraint validators at ru.mybooklist.service -->
     <context:component-scan base-package="ru.mybooklist.validation.validator.**"/>
 
+    <!-- Register event listeners at ru.mybooklist.service -->
+    <context:component-scan base-package="ru.mybooklist.event.listener.**"/>
+
     <!-- Resolves elements to /WEB-INF/jsp/**.jsp -->
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
@@ -57,4 +60,18 @@
     </mvc:interceptors>
 
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" p:defaultLocale="en"/>
+
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com" />
+        <property name="port" value="587" />
+        <property name="username" value="mybooklist.service" />
+        <property name="password" value="ignatlolkapizdos" />
+
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+            </props>
+        </property>
+    </bean>
 </beans>

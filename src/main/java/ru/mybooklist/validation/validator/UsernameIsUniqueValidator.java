@@ -2,9 +2,7 @@ package ru.mybooklist.validation.validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.mybooklist.dto.UserDTO;
 import ru.mybooklist.service.UserService;
-import ru.mybooklist.validation.PasswordMatches;
 import ru.mybooklist.validation.UsernameIsUnique;
 
 import javax.validation.ConstraintValidator;
