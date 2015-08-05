@@ -1,5 +1,8 @@
 package ru.mybooklist.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -17,7 +20,8 @@ public class Role {
     @Column(name = "name", unique = true, nullable = false, length = 20)
     private String name;
 
-    @ManyToMany
+    @ManyToMany()
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
             name = "roles_privileges",
             joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),

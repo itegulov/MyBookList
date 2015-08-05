@@ -19,18 +19,13 @@ public class LoginAttemptService {
     private static final Logger logger = LogManager.getLogger();
 
     private static final int MAX_ATTEMPTS = 10;
-    private LoadingCache<String, Integer> attemptsCache;
-
-    public LoginAttemptService() {
-        super();
-        attemptsCache = CacheBuilder.newBuilder().
-                expireAfterWrite(1, TimeUnit.DAYS).build(new CacheLoader<String, Integer>() {
-            @ParametersAreNonnullByDefault
-            public Integer load(String key) {
-                return 0;
-            }
-        });
-    }
+    private LoadingCache<String, Integer> attemptsCache =
+            CacheBuilder.newBuilder().expireAfterWrite(1, TimeUnit.DAYS).build(new CacheLoader<String, Integer>() {
+                @ParametersAreNonnullByDefault
+                public Integer load(String key) {
+                    return 0;
+                }
+            });
 
     public void loginSucceeded(String key) {
         attemptsCache.invalidate(key);
