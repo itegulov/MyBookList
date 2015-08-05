@@ -10,6 +10,7 @@ import ru.mybooklist.model.AuthToken;
 import ru.mybooklist.model.User;
 import ru.mybooklist.model.dto.UserDTO;
 
+import java.util.Collections;
 import java.util.Date;
 
 /**
@@ -37,7 +38,7 @@ public class UserService {
 
     public User registerUser(UserDTO userDTO) {
         User user = new User(userDTO.getUsername(), passwordEncoder.encode(userDTO.getPassword()),
-                userDTO.getEmail(), roleDAO.getRole("user"), false);
+                userDTO.getEmail(), Collections.singletonList(roleDAO.findByName("user")), false);
         userDAO.addUser(user);
         return user;
     }

@@ -5,19 +5,20 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-import ru.mybooklist.model.Role;
+import ru.mybooklist.model.Privilege;
+
+import javax.transaction.Transactional;
 
 /**
  * @author Daniyar Itegulov
  */
 @Repository
 @Transactional
-public class RoleDAO {
+public class PrivilegeDAO {
     private SessionFactory sessionFactory;
 
     @Autowired
-    public RoleDAO(SessionFactory sessionFactory) {
+    public PrivilegeDAO(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
@@ -25,12 +26,12 @@ public class RoleDAO {
         return sessionFactory.getCurrentSession();
     }
 
-    public Role findByName(String roleName) {
-        return (Role) currentSession().createCriteria(Role.class)
-                .add(Restrictions.eq("name", roleName)).uniqueResult();
+    public void addPrivilege(Privilege privilege) {
+        currentSession().save(privilege);
     }
 
-    public void addRole(Role role) {
-        currentSession().save(role);
+    public Privilege findByName(String name) {
+        return (Privilege) currentSession().createCriteria(Privilege.class)
+                .add(Restrictions.eq("name", name)).uniqueResult();
     }
 }

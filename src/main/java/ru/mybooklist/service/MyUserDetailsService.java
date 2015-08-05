@@ -6,9 +6,16 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.mybooklist.dao.UserDAO;
+import ru.mybooklist.model.Privilege;
+import ru.mybooklist.model.Role;
 import ru.mybooklist.model.User;
 
 import java.util.Collections;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author Daniyar Itegulov
@@ -26,7 +33,13 @@ public class MyUserDetailsService implements UserDetailsService {
         } else if (!user.isConfirmed()) {
             throw new UsernameNotFoundException("User " + s + " isn't confirmed");
         }
+        List<Privilege> privileges = user.getRoles().stream().flatMap(new Function<Role, Stream<Privilege>>() {
+            @Override
+            public Stream<Privilege> apply(Role role) {
+                return role.getPrivileges().stream();
+            }
+        }).collect(Collectors.<Privilege>toList());
         return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(),
-                user.isConfirmed(), true, true, true, Collections.singletonList(user.getRole()));
+                user.isConfirmed(), true, true, true, privileges);
     }
 }

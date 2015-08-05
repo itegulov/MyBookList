@@ -1,9 +1,7 @@
 package ru.mybooklist.model;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
-import ru.mybooklist.model.dto.UserDTO;
-
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * @author Daniyar Itegulov
@@ -11,7 +9,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = {"name", "email"}))
 public class User {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "id", unique = true, nullable = false)
     private int id;
 
@@ -24,9 +23,12 @@ public class User {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @ManyToOne()
-    @JoinColumn(name = "role", nullable = false)
-    private Role role;
+    @ManyToMany()
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
 
     @Column(name = "confirmed", nullable = false)
     private boolean confirmed;
@@ -34,11 +36,11 @@ public class User {
     public User() {
     }
 
-    public User(String name, String password, String email, Role role, boolean confirmed) {
+    public User(String name, String password, String email, Collection<Role> roles, boolean confirmed) {
         this.name = name;
         this.password = password;
         this.email = email;
-        this.role = role;
+        this.roles = roles;
         this.confirmed = confirmed;
     }
 
@@ -100,19 +102,19 @@ public class User {
                 '}';
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
     public boolean isConfirmed() {
         return confirmed;
     }
 
     public void setConfirmed(boolean confirmed) {
         this.confirmed = confirmed;
+    }
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
 }
