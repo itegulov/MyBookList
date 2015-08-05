@@ -50,8 +50,8 @@ public class UserRegistrationController {
 
     @RequestMapping(value = "sign_up", method = RequestMethod.POST)
     public String addUserFromForm(@Valid @ModelAttribute("userDTO") UserDTO userDTO,
-                                  Model model,
                                   BindingResult bindingResult,
+                                  Model model,
                                   RedirectAttributes redirect,
                                   HttpServletRequest request) {
         if (bindingResult.hasErrors()) {

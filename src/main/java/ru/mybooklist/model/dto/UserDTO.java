@@ -16,7 +16,7 @@ import javax.validation.constraints.Pattern;
 public class UserDTO {
 
     @NotNull
-    @Pattern(message = "{Pattern.user.name}", regexp="^[a-zA-Z0-9]+$")
+    @Pattern(message = "{Pattern.user.name}", regexp="^[a-zA-Z0-9]*$")
     @Length(message = "{Length.user.name}", min = 3, max=20)
     @UsernameIsUnique
     private String username;
@@ -29,8 +29,7 @@ public class UserDTO {
     private String passwordConfirm;
 
     @NotNull
-    @Email(message = "{Email.user.email}")
-    @Pattern(regexp = ".+@.+\\..+", message = "{Email.user.email}")
+    @Email(regexp = ".+@.+\\..+", message = "{Email.user.email}")
     @EmailIsUnique
     private String email;
 
