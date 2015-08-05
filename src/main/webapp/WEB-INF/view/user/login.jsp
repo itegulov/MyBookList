@@ -27,6 +27,11 @@
                                 <s:message code="authToken.invalid"/>
                             </div>
                         </c:when>
+                        <c:when test="${SPRING_SECURITY_LAST_EXCEPTION.message == 'Address is blocked'}">
+                            <div class="alert alert-error">
+                                <s:message code="auth.blocked"/>
+                            </div>
+                        </c:when>
                         <c:otherwise>
                             <div class="alert alert-error">
                                 <s:message code="loginPage.form.errorLogin.label"/>

@@ -18,6 +18,13 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
+    <!-- Exposes request to current thread -->
+    <listener>
+        <listener-class>
+            org.springframework.web.context.request.RequestContextListener
+        </listener-class>
+    </listener>
+
     <!-- Configure what contexts must be loaded -->
     <context-param>
         <param-name>contextConfigLocation</param-name>

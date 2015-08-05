@@ -10,6 +10,7 @@ import ru.mybooklist.model.Privilege;
 import ru.mybooklist.model.Role;
 import ru.mybooklist.model.User;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
@@ -25,8 +26,17 @@ public class MyUserDetailsService implements UserDetailsService {
     @Autowired
     private UserDAO userDAO;
 
+    @Autowired
+    private LoginAttemptService loginAttemptService;
+
+    @Autowired
+    private HttpServletRequest request;
+
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        if (loginAttemptService.isBlocked(request.getRemoteAddr())) {
+            throw new IllegalStateException("Address is blocked");
+        }
         User user = userDAO.getUserByUsername(s);
         if (user == null) {
             throw new UsernameNotFoundException("No user found with username: " + s);
