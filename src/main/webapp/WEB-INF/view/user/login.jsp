@@ -37,26 +37,35 @@
                 <form action="${loginUrl}" method="post" class="omb_loginForm" autocomplete="off">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
-                        <input id="username" name="username" type="text" maxlength="15" size="15" class="form-control" title="username"/>
+                        <input id="username" name="username" type="text" maxlength="15" size="15" class="form-control"
+                               title="username"/>
                     </div>
                     <span class="help-block"></span>
 
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
-                        <input id="password" name="password" type="password" maxlength="30" class="form-control" title="username"/>
+                        <input id="password" name="password" type="password" maxlength="30" class="form-control"
+                               title="password"/>
                     </div>
                     <span class="help-block"></span>
 
-                    <button class="btn btn-lg btn-primary btn-block" type="submit"><s:message code="user.add_user.login_action"/></button>
+                    <div class="input-group">
+                        <span>Remember me</span>
+                        <input type="checkbox" name="remember_me" title="remember_me"/>
+                    </div>
+                    <span class="help-block"></span>
+
+                    <button class="btn btn-lg btn-primary btn-block" type="submit"><s:message
+                            code="user.add_user.login_action"/></button>
                     <sec:csrfMetaTags/>
-                    <sec:csrfInput />
+                    <sec:csrfInput/>
                 </form>
             </div>
         </div>
     </div>
 </div>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#username').watermark('Username');
         $('#password').watermark('Password');
     });
