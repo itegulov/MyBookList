@@ -17,6 +17,7 @@
         <property name="definitions">
             <list>
                 <value>/WEB-INF/view/views.xml</value>
+                <value>/WEB-INF/view/profile/profile_views.xml</value>
             </list>
         </property>
     </bean>

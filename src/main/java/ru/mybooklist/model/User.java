@@ -1,5 +1,8 @@
 package ru.mybooklist.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -23,7 +26,8 @@ public class User {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany()
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
@@ -32,6 +36,9 @@ public class User {
 
     @Column(name = "confirmed", nullable = false)
     private boolean confirmed;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Collection<BookList> bookLists;
 
     public User() {
     }
@@ -116,5 +123,13 @@ public class User {
 
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
+    }
+
+    public Collection<BookList> getBookLists() {
+        return bookLists;
+    }
+
+    public void setBookLists(Collection<BookList> bookLists) {
+        this.bookLists = bookLists;
     }
 }
