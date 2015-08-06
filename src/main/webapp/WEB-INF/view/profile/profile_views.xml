@@ -1,7 +1,30 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-    <definition name="profile/booklists" extends="template"> <!-- User wants to see his book lists -->
+    <definition name="profile_template" template="/WEB-INF/view/template/profile.jsp"> <!-- Generic template -->
+        <put-attribute name="header" value="/WEB-INF/view/tiles/header.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/view/tiles/footer.jsp"/>
+        <put-attribute name="styles" value="/WEB-INF/view/profile/style_profile.jsp"/>
+        <put-attribute name="scripts" value="/WEB-INF/view/tiles/scripts.jsp"/>
+    </definition>
+
+    <definition name="profile/booklists" extends="profile_template"> <!-- User wants to see his book lists -->
         <put-attribute name="content" value="/WEB-INF/view/profile/booklists.jsp"/>
+        <put-attribute name="sidebar" value="/WEB-INF/view/tiles/full_sidebar.jsp"/>
+    </definition>
+
+    <definition name="profile/full_info" extends="profile_template"> <!-- Full information about user -->
+        <put-attribute name="content" value="/WEB-INF/view/profile/full_info.jsp"/>
+        <put-attribute name="sidebar" value="/WEB-INF/view/tiles/full_sidebar.jsp"/>
+    </definition>
+
+    <definition name="profile/settings" extends="profile_template"> <!-- User's settings -->
+        <put-attribute name="content" value="/WEB-INF/view/profile/settings.jsp"/>
+        <put-attribute name="sidebar" value="/WEB-INF/view/tiles/full_sidebar.jsp"/>
+    </definition>
+
+    <definition name="profile/info" extends="profile_template"> <!-- General information about user -->
+        <put-attribute name="content" value="/WEB-INF/view/profile/info.jsp"/>
+        <put-attribute name="sidebar" value="/WEB-INF/view/tiles/full_sidebar.jsp"/>
     </definition>
 </tiles-definitions>

@@ -4,6 +4,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.Collection;
 
 /**
@@ -25,6 +26,9 @@ public class User {
 
     @Column(name = "email", unique = true, nullable = false)
     private String email;
+
+    @Column(name = "join_date", nullable = false)
+    private Date joinDate;
 
     @ManyToMany()
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -131,5 +135,13 @@ public class User {
 
     public void setBookLists(Collection<BookList> bookLists) {
         this.bookLists = bookLists;
+    }
+
+    public Date getJoinDate() {
+        return joinDate;
+    }
+
+    public void setJoinDate(Date joinDate) {
+        this.joinDate = joinDate;
     }
 }

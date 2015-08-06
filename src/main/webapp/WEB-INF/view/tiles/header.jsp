@@ -26,8 +26,15 @@
                     <li><a href="<c:url value="/user/sign_up"/>"><s:message code="user.add_user.sign_up"/></a></li>
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
-                    <li><span class="navbar-text">Welcome, <sec:authentication property="principal.username"/></span></li>
-                    <li><a href="<c:url value="/user/logout"/>"><s:message code="user.logout"/></a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><sec:authentication property="principal.username"/> <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/profile/<sec:authentication property="principal.username"/>">Profile</a></li>
+                            <li><a href="/profile/settings/<sec:authentication property="principal.username"/>">Settings</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="<c:url value="/user/logout"/>"><s:message code="user.logout"/></a></li>
+                        </ul>
+                    </li>
                 </sec:authorize>
                 <li><a href="?language=en"><img src="<c:url value="/res/images/flags/en.png"/>"/></a></li>
                 <li><a href="?language=ru"><img src="<c:url value="/res/images/flags/ru.png"/>"/></a></li>
