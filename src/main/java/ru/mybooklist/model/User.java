@@ -4,7 +4,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Collection;
 
 /**
@@ -47,10 +47,11 @@ public class User {
     public User() {
     }
 
-    public User(String name, String password, String email, Collection<Role> roles, boolean confirmed) {
+    public User(String name, String password, String email, Date joinDate, Collection<Role> roles, boolean confirmed) {
         this.name = name;
         this.password = password;
         this.email = email;
+        this.joinDate = joinDate;
         this.roles = roles;
         this.confirmed = confirmed;
     }

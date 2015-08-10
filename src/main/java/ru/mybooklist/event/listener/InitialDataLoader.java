@@ -12,6 +12,7 @@ import ru.mybooklist.model.Privilege;
 import ru.mybooklist.model.Role;
 import ru.mybooklist.model.User;
 
+import java.util.Date;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -40,7 +41,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
         if (userDAO.isUsernameAvailable("admin")) {
             userDAO.addUser(new User("admin", passwordEncoder.encode("admin"),
-                    "admin@mybooklist.ru", Arrays.asList(adminRole, userRole), true));
+                    "admin@mybooklist.ru", new Date(), Arrays.asList(adminRole, userRole), true));
         }
     }
 
