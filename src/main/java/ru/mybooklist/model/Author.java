@@ -12,10 +12,10 @@ public class Author {
     @Column(name = "id", unique = true, nullable = false)
     private int id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, length = 64)
     private String name;
 
-    @Column(name = "family", nullable = false)
+    @Column(name = "family", nullable = false, length = 64)
     private String family;
 
     public int getId() {

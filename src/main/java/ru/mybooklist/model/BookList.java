@@ -17,7 +17,7 @@ public class BookList {
     @Column(name = "id", unique = true, nullable = false)
     private int id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, length = 128)
     private String name;
 
     @ManyToOne()

@@ -12,16 +12,16 @@ public class Book {
     @Column(name = "id", unique = true, nullable = false)
     private int id;
 
-    @Column(name = "ISBN", unique = true)
+    @Column(name = "ISBN", unique = true, length = 20)
     private String ISBN;
 
-    @Column(name = "title", nullable = false)
+    @Column(name = "title", nullable = false, length = 128)
     private String title;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description", nullable = false, length = 2048)
     private String description;
 
-    @Column(name = "image_path", nullable = false)
+    @Column(name = "image_path", nullable = false, length = 32)
     private String imagePath;
 
     @ManyToOne()

@@ -15,7 +15,7 @@ public class Privilege implements GrantedAuthority {
     @Column(name = "id", unique = true, nullable = false)
     private int id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, length = 64)
     private String name;
 
     @ManyToMany(mappedBy = "privileges")
