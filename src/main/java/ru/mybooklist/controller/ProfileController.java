@@ -56,6 +56,7 @@ public class ProfileController {
             return "profile/no_user";
         }
         model.addAttribute("user", user);
+        model.addAttribute("randomBooks", user.getRandomBooks());
         if (principal.getName().equals(username)) {
             return "profile/full_info";
         } else {

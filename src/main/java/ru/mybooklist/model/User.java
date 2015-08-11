@@ -4,8 +4,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.Collection;
+import java.util.*;
 
 /**
  * @author Daniyar Itegulov
@@ -18,10 +17,10 @@ public class User {
     @Column(name = "id", unique = true, nullable = false)
     private int id;
 
-    @Column(name = "name", unique = true, nullable = false, length = 20)
+    @Column(name = "name", unique = true, nullable = false, length = 128)
     private String name;
 
-    @Column(name = "password", nullable = false, length = 20)
+    @Column(name = "password", nullable = false, length = 128)
     private String password;
 
     @Column(name = "email", unique = true, nullable = false, length = 256)
@@ -144,5 +143,14 @@ public class User {
 
     public void setJoinDate(Date joinDate) {
         this.joinDate = joinDate;
+    }
+
+    public List<Book> getRandomBooks() {
+        List<Book> books = new ArrayList<>();
+        for (BookList bookList: bookLists) {
+            books.addAll(bookList.getBooks());
+        }
+        Collections.shuffle(books);
+        return books.subList(0, Math.min(books.size(), 3));
     }
 }

@@ -15,7 +15,7 @@ public class AuthToken {
     @Column(name = "id", unique = true, nullable = false)
     private int id;
 
-    @Column(name = "token", unique = true, nullable = false, length = 30)
+    @Column(name = "token", unique = true, nullable = false, length = 40)
     private String token;
 
     @ManyToOne()

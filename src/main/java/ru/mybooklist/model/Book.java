@@ -18,7 +18,7 @@ public class Book {
     @Column(name = "title", nullable = false, length = 128)
     private String title;
 
-    @Column(name = "description", nullable = false, length = 2048)
+    @Column(name = "description", nullable = false, length = 4096)
     private String description;
 
     @Column(name = "image_path", nullable = false, length = 32)

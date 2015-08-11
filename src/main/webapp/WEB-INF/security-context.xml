@@ -29,7 +29,7 @@
                              authentication-failure-url="/user/loginfailed"
                              always-use-default-target='true'/>
         <security:logout invalidate-session="false"  logout-url="/logout" delete-cookies="JSESSIONID" />
-        <security:remember-me remember-me-parameter="remember_me" key="superSecretKey" token-validity-seconds="86400"/>
+        <!--<security:remember-me remember-me-parameter="remember_me" key="superSecretKey" token-validity-seconds="86400"/>-->
     </security:http>
 
     <bean id="userDetailsService" class="ru.mybooklist.service.MyUserDetailsService"/>
