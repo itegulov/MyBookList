@@ -8,9 +8,14 @@
         <put-attribute name="scripts" value="/WEB-INF/view/tiles/scripts.jsp"/>
     </definition>
 
-    <definition name="profile/booklists" extends="profile_template"> <!-- User wants to see his book lists -->
+    <definition name="profile/full_booklists" extends="profile_template"> <!-- User wants to see his book lists -->
         <put-attribute name="content" value="/WEB-INF/view/profile/booklists.jsp"/>
         <put-attribute name="sidebar" value="/WEB-INF/view/tiles/full_sidebar.jsp"/>
+    </definition>
+
+    <definition name="profile/booklists" extends="profile_template"> <!-- User wants to see his book lists -->
+        <put-attribute name="content" value="/WEB-INF/view/profile/booklists.jsp"/>
+        <put-attribute name="sidebar" value="/WEB-INF/view/tiles/sidebar.jsp"/>
     </definition>
 
     <definition name="profile/full_info" extends="profile_template"> <!-- Full information about user -->
@@ -25,6 +30,6 @@
 
     <definition name="profile/info" extends="profile_template"> <!-- General information about user -->
         <put-attribute name="content" value="/WEB-INF/view/profile/info.jsp"/>
-        <put-attribute name="sidebar" value="/WEB-INF/view/tiles/full_sidebar.jsp"/>
+        <put-attribute name="sidebar" value="/WEB-INF/view/tiles/sidebar.jsp"/>
     </definition>
 </tiles-definitions>

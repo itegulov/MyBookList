@@ -29,7 +29,11 @@ public class ProfileController {
         }
         model.addAttribute("user", user);
         model.addAttribute("booklists", user.getBookLists());
-        return "profile/booklists";
+        if (principal != null && principal.getName().equals(username)) {
+            return "profile/full_booklists";
+        } else {
+            return "profile/booklists";
+        }
     }
 
     @RequestMapping(value = "settings/{username}")
@@ -57,7 +61,7 @@ public class ProfileController {
         }
         model.addAttribute("user", user);
         model.addAttribute("randomBooks", user.getRandomBooks());
-        if (principal.getName().equals(username)) {
+        if (principal != null && principal.getName().equals(username)) {
             return "profile/full_info";
         } else {
             return "profile/info";

@@ -9,6 +9,7 @@
     <url>http://maven.apache.org</url>
     <properties>
         <org.springframework.version>4.1.7.RELEASE</org.springframework.version>
+        <org.spring.security.version>4.0.1.RELEASE</org.spring.security.version>
         <org.hibernate.version>4.3.10.Final</org.hibernate.version>
         <apache.tiles.version>3.0.5</apache.tiles.version>
     </properties>
@@ -91,20 +92,27 @@
             <version>${org.springframework.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Spring security dependencies -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${org.spring.security.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
-            <version>4.0.1.RELEASE</version>
+            <version>${org.spring.security.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-            <version>4.0.1.RELEASE</version>
+            <version>${org.spring.security.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-taglibs</artifactId>
-            <version>4.0.1.RELEASE</version>
+            <version>${org.spring.security.version}</version>
         </dependency>
 
         <!-- A lot of Hibernate ORM dependencies -->
