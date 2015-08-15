@@ -19,7 +19,7 @@
     </definition>
 
     <definition name="profile/full_info" extends="profile_template"> <!-- Full information about user -->
-        <put-attribute name="content" value="/WEB-INF/view/profile/full_info.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/view/profile/info.jsp"/>
         <put-attribute name="sidebar" value="/WEB-INF/view/tiles/full_sidebar.jsp"/>
     </definition>
 

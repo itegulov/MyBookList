@@ -5,8 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.mybooklist.dao.UserDAO;
 import ru.mybooklist.model.User;
+import ru.mybooklist.repositories.UserRepository;
 
 import java.security.Principal;
 
@@ -18,11 +18,11 @@ import java.security.Principal;
 public class ProfileController {
 
     @Autowired
-    private UserDAO userDAO;
+    private UserRepository userRepository;
 
     @RequestMapping(value = "booklists/{username}")
     public String getUserBookLists(@PathVariable String username, Model model, Principal principal) {
-        User user = userDAO.getUserByUsername(username);
+        User user = userRepository.findUserByName(username);
         if (user == null) {
             model.addAttribute("username", username);
             return "profile/no_user";
@@ -38,7 +38,7 @@ public class ProfileController {
 
     @RequestMapping(value = "settings/{username}")
     public String getUserSettings(@PathVariable String username, Model model, Principal principal) {
-        User user = userDAO.getUserByUsername(username);
+        User user = userRepository.findUserByName(username);
         if (user == null) {
             model.addAttribute("username", username);
             return "profile/no_user";
@@ -54,7 +54,7 @@ public class ProfileController {
     @RequestMapping(value = "{username}")
     public String getUserProfile(@PathVariable String username,
                              Principal principal, Model model) {
-        User user = userDAO.getUserByUsername(username);
+        User user = userRepository.findUserByName(username);
         if (user == null) {
             model.addAttribute("username", username);
             return "profile/no_user";

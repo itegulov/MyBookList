@@ -18,7 +18,7 @@ public class AuthToken {
     @Column(name = "token", unique = true, nullable = false, length = 40)
     private String token;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

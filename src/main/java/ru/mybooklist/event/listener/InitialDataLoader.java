@@ -5,12 +5,12 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import ru.mybooklist.dao.PrivilegeDAO;
-import ru.mybooklist.dao.RoleDAO;
-import ru.mybooklist.dao.UserDAO;
 import ru.mybooklist.model.Privilege;
 import ru.mybooklist.model.Role;
 import ru.mybooklist.model.User;
+import ru.mybooklist.repositories.PrivilegeRepository;
+import ru.mybooklist.repositories.RoleRepository;
+import ru.mybooklist.repositories.UserRepository;
 
 import java.util.Date;
 import java.util.Arrays;
@@ -23,11 +23,11 @@ import java.util.Collections;
 @Component
 public class InitialDataLoader implements ApplicationListener<ContextRefreshedEvent> {
     @Autowired
-    private PrivilegeDAO privilegeDAO;
+    private PrivilegeRepository privilegeRepository;
     @Autowired
-    private RoleDAO roleDAO;
+    private RoleRepository roleRepository;
     @Autowired
-    private UserDAO userDAO;
+    private UserRepository userRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -39,27 +39,27 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         Role adminRole = createRoleIfNotFound("ROLE_ADMIN", Arrays.asList(readPrivilege, writePrivilege));
         Role userRole = createRoleIfNotFound("ROLE_USER", Collections.singletonList(readPrivilege));
 
-        if (userDAO.isUsernameAvailable("admin")) {
-            userDAO.addUser(new User("admin", passwordEncoder.encode("admin"),
+        if (!userRepository.isNameExists("admin")) {
+            userRepository.save(new User("admin", passwordEncoder.encode("admin"),
                     "admin@mybooklist.ru", new Date(), Arrays.asList(adminRole, userRole), true));
         }
     }
 
     private Privilege createPrivilegeIfNotFound(String name) {
-        Privilege privilege = privilegeDAO.findByName(name);
+        Privilege privilege = privilegeRepository.findPrivilegeByName(name);
         if (privilege == null) {
             privilege = new Privilege(name);
-            privilegeDAO.addPrivilege(privilege);
+            privilegeRepository.save(privilege);
         }
         return privilege;
     }
 
     private Role createRoleIfNotFound(String name, Collection<Privilege> privileges) {
-        Role role = roleDAO.findByName(name);
+        Role role = roleRepository.findRoleByName(name);
         if (role == null) {
             role = new Role(name);
             role.setPrivileges(privileges);
-            roleDAO.addRole(role);
+            roleRepository.save(role);
         }
         return role;
     }

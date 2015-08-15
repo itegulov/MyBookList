@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ru.mybooklist.dao.BookDAO;
+import ru.mybooklist.repositories.BookRepository;
 
 /**
  * @author Daniyar Itegulov
@@ -14,11 +14,11 @@ import ru.mybooklist.dao.BookDAO;
 @Controller
 public class MainController {
     @Autowired
-    private BookDAO bookDAO;
+    private BookRepository bookRepository;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(Model model) {
-        model.addAttribute("books", bookDAO.popularBooks());
+        model.addAttribute("books", bookRepository.findAll());
         return "index";
     }
 

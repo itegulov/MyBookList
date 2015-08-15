@@ -5,10 +5,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.mybooklist.dao.UserDAO;
 import ru.mybooklist.model.Privilege;
 import ru.mybooklist.model.Role;
 import ru.mybooklist.model.User;
+import ru.mybooklist.repositories.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -22,7 +22,7 @@ import java.util.stream.Stream;
 @Service
 public class MyUserDetailsService implements UserDetailsService {
     @Autowired
-    private UserDAO userDAO;
+    private UserRepository userRepository;
 
     @Autowired
     private LoginAttemptService loginAttemptService;
@@ -35,7 +35,7 @@ public class MyUserDetailsService implements UserDetailsService {
         if (loginAttemptService.isBlocked(request.getRemoteAddr())) {
             throw new IllegalStateException("Address is blocked");
         }
-        User user = userDAO.getUserByUsername(s);
+        User user = userRepository.findUserByName(s);
         if (user == null) {
             throw new UsernameNotFoundException("No user found with username: " + s);
         } else if (!user.isConfirmed()) {

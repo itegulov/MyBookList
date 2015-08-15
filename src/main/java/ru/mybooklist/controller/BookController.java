@@ -6,10 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.mybooklist.dao.BookDAO;
-import ru.mybooklist.dao.UserDAO;
 import ru.mybooklist.model.Book;
-import ru.mybooklist.model.User;
+import ru.mybooklist.repositories.BookRepository;
 
 /**
  * @author Daniyar Itegulov
@@ -18,7 +16,7 @@ import ru.mybooklist.model.User;
 @RequestMapping("books")
 public class BookController {
     @Autowired
-    private BookDAO bookDAO;
+    private BookRepository bookRepository;
 
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -28,13 +26,13 @@ public class BookController {
 
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String allBooks(Model model) {
-        model.addAttribute("books", bookDAO.allBooks());
+        model.addAttribute("books", bookRepository.findAll());
         return "books/list";
     }
 
     @RequestMapping(params = "id", method = RequestMethod.GET)
     public String bookWithId(@RequestParam("id") int id, Model model) {
-        Book book = bookDAO.getBookById(id);
+        Book book = bookRepository.findOne(id);
         if (book == null) {
             throw new ResourceNotFoundException("There is no book with id = " + id);
         }
