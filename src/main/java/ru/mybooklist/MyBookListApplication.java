@@ -9,7 +9,10 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableAutoConfiguration
-@ComponentScan(value = {"ru.mybooklist.service", "ru.mybooklist.security"})
+@ComponentScan(value = {
+        "ru.mybooklist.service",
+        "ru.mybooklist.security",
+        "ru.mybooklist.internationalization"})
 public class MyBookListApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
