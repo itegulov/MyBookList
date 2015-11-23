@@ -16,9 +16,11 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 public class LoginAttemptService {
+
     private static final Logger logger = LogManager.getLogger();
 
     private static final int MAX_ATTEMPTS = 10;
+
     private LoadingCache<String, Integer> attemptsCache =
             CacheBuilder.newBuilder().expireAfterWrite(1, TimeUnit.DAYS).build(new CacheLoader<String, Integer>() {
                 @ParametersAreNonnullByDefault
@@ -38,7 +40,7 @@ public class LoginAttemptService {
         } catch (ExecutionException e) {
             throw new IllegalStateException("This can't happen");
         }
-        logger.info("Already " + attempts + " was made");
+        logger.info("Already %d was made", attempts);
         attempts++;
         attemptsCache.put(key, attempts);
     }

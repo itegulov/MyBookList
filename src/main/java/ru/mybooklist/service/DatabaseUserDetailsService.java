@@ -20,7 +20,8 @@ import java.util.stream.Stream;
  * @author Daniyar Itegulov
  */
 @Service
-public class MyUserDetailsService implements UserDetailsService {
+public class DatabaseUserDetailsService implements UserDetailsService {
+
     @Autowired
     private UserRepository userRepository;
 
@@ -41,12 +42,9 @@ public class MyUserDetailsService implements UserDetailsService {
         } else if (!user.isConfirmed()) {
             throw new UsernameNotFoundException("User " + s + " isn't confirmed");
         }
-        List<Privilege> privileges = user.getRoles().stream().flatMap(new Function<Role, Stream<Privilege>>() {
-            @Override
-            public Stream<Privilege> apply(Role role) {
-                return role.getPrivileges().stream();
-            }
-        }).collect(Collectors.<Privilege>toList());
+        List<Privilege> privileges = user.getRoles().stream()
+                .flatMap(role -> role.getPrivileges().stream())
+                .collect(Collectors.<Privilege>toList());
         return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(),
                 user.isConfirmed(), true, true, true, privileges);
     }

@@ -18,10 +18,13 @@ import java.util.Date;
  */
 @Service
 public class UserService {
+
     @Autowired
     private AuthTokenRepository authTokenRepository;
+
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private RoleRepository roleRepository;
 
