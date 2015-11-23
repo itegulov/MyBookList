@@ -12,6 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(value = {
         "ru.mybooklist.service",
         "ru.mybooklist.security",
+        "ru.mybooklist.controller",
         "ru.mybooklist.internationalization"})
 public class MyBookListApplication extends SpringBootServletInitializer {
 

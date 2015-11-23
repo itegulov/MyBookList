@@ -15,6 +15,7 @@ import ru.mybooklist.repositories.BookRepository;
 @Controller
 @RequestMapping("books")
 public class BookController {
+
     @Autowired
     private BookRepository bookRepository;
 

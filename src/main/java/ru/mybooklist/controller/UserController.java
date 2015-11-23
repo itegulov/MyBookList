@@ -11,6 +11,7 @@ import ru.mybooklist.service.UserService;
 @Controller
 @RequestMapping("user")
 public class UserController {
+
     @Autowired
     private UserService userService;
 

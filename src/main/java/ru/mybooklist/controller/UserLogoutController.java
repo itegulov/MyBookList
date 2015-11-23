@@ -30,8 +30,6 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "user")
 public class UserLogoutController {
-    private static final HttpClient client = HttpClientBuilder.create().build();
-    private static final Logger logger = LogManager.getLogger();
 
     @RequestMapping(value = "logout", method = RequestMethod.GET)
     public String myLogoff(HttpServletRequest request, HttpServletResponse response) {

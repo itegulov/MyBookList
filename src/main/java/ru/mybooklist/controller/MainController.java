@@ -13,6 +13,7 @@ import ru.mybooklist.repositories.BookRepository;
  */
 @Controller
 public class MainController {
+
     @Autowired
     private BookRepository bookRepository;
 
