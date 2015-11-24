@@ -30,13 +30,13 @@ import java.sql.SQLException;
 import java.util.Arrays;
 
 @Configuration
-@EnableJpaRepositories("com.mycompany.myapp.repository")
+@EnableJpaRepositories("ru.mybooklist.repository")
 @EnableJpaAuditing(auditorAwareRef = "springSecurityAuditorAware")
 @EnableTransactionManagement
 @EnableElasticsearchRepositories("com.mycompany.myapp.repository.search")
 public class DatabaseConfiguration {
 
-    private final Logger log = LoggerFactory.getLogger(DatabaseConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(DatabaseConfiguration.class);
 
     @Inject
     private Environment env;
@@ -46,7 +46,7 @@ public class DatabaseConfiguration {
 
     @Bean(destroyMethod = "close")
     @ConditionalOnExpression("#{!environment.acceptsProfiles('cloud') && !environment.acceptsProfiles('heroku')}")
-    public DataSource dataSource(DataSourceProperties dataSourceProperties, JHipsterProperties jHipsterProperties) {
+    public DataSource dataSource(DataSourceProperties dataSourceProperties) {
         log.debug("Configuring Datasource");
         if (dataSourceProperties.getUrl() == null) {
             log.error("Your database connection pool configuration is incorrect! The application" +
@@ -74,18 +74,19 @@ public class DatabaseConfiguration {
         }
         return new HikariDataSource(config);
     }
+
     /**
      * Open the TCP port for the H2 database, so it is available remotely.
      */
     @Bean(initMethod = "start", destroyMethod = "stop")
     @Profile(Constants.SPRING_PROFILE_DEVELOPMENT)
     public Server h2TCPServer() throws SQLException {
-        return Server.createTcpServer("-tcp","-tcpAllowOthers");
+        return Server.createTcpServer("-tcp", "-tcpAllowOthers");
     }
 
     @Bean
     public SpringLiquibase liquibase(DataSource dataSource, DataSourceProperties dataSourceProperties,
-        LiquibaseProperties liquibaseProperties) {
+                                     LiquibaseProperties liquibaseProperties) {
 
         // Use liquibase.integration.spring.SpringLiquibase if you don't want Liquibase to start asynchronously
         SpringLiquibase liquibase = new AsyncSpringLiquibase();
