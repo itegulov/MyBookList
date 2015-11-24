@@ -1,6 +1,6 @@
 package ru.mybooklist.web.rest;
 
-import ru.mybooklist.Application;
+import ru.mybooklist.MyBookListApplication;
 import ru.mybooklist.domain.Authority;
 import ru.mybooklist.domain.User;
 import ru.mybooklist.repository.AuthorityRepository;
@@ -42,7 +42,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see UserService
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Application.class)
+@SpringApplicationConfiguration(classes = MyBookListApplication.class)
 @WebAppConfiguration
 @IntegrationTest
 public class AccountResourceIntTest {

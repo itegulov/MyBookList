@@ -1,6 +1,6 @@
 package ru.mybooklist.service;
 
-import ru.mybooklist.Application;
+import ru.mybooklist.MyBookListApplication;
 import ru.mybooklist.domain.PersistentToken;
 import ru.mybooklist.domain.User;
 import ru.mybooklist.repository.PersistentTokenRepository;
@@ -28,7 +28,7 @@ import static org.assertj.core.api.Assertions.*;
  * @see UserService
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Application.class)
+@SpringApplicationConfiguration(classes = MyBookListApplication.class)
 @WebAppConfiguration
 @IntegrationTest
 @Transactional

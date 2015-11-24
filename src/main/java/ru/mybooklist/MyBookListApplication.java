@@ -23,23 +23,27 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Collection;
 
+/**
+ * Entry point for MyBookList application.
+ */
 @ComponentScan
-@EnableAutoConfiguration(exclude = { MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class })
-@EnableConfigurationProperties({ JHipsterProperties.class, LiquibaseProperties.class })
-public class Application {
+@EnableAutoConfiguration(exclude = {MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class})
+@EnableConfigurationProperties({JHipsterProperties.class, LiquibaseProperties.class})
+public class MyBookListApplication {
 
-    private static final Logger log = LoggerFactory.getLogger(Application.class);
+    private static final Logger log = LoggerFactory.getLogger(MyBookListApplication.class);
 
     @Inject
     private Environment env;
 
     /**
-     * Initializes Java.
+     * Initializes MyBookListApplication.
      * <p/>
      * Spring profiles can be configured with a program arguments --spring.profiles.active=your-active-profile
      * <p/>
      * <p>
-     * You can find more information on how profiles work with JHipster on <a href="http://jhipster.github.io/profiles.html">http://jhipster.github.io/profiles.html</a>.
+     * You can find more information on how profiles work with JHipster on
+     * <a href="http://jhipster.github.io/profiles.html">http://jhipster.github.io/profiles.html</a>.
      * </p>
      */
     @PostConstruct
@@ -49,15 +53,18 @@ public class Application {
         } else {
             log.info("Running with Spring profile(s) : {}", Arrays.toString(env.getActiveProfiles()));
             Collection<String> activeProfiles = Arrays.asList(env.getActiveProfiles());
-            if (activeProfiles.contains(Constants.SPRING_PROFILE_DEVELOPMENT) && activeProfiles.contains(Constants.SPRING_PROFILE_PRODUCTION)) {
+            if (activeProfiles.contains(Constants.SPRING_PROFILE_DEVELOPMENT) &&
+                activeProfiles.contains(Constants.SPRING_PROFILE_PRODUCTION)) {
                 log.error("You have misconfigured your application! " +
                     "It should not run with both the 'dev' and 'prod' profiles at the same time.");
             }
-            if (activeProfiles.contains(Constants.SPRING_PROFILE_PRODUCTION) && activeProfiles.contains(Constants.SPRING_PROFILE_FAST)) {
+            if (activeProfiles.contains(Constants.SPRING_PROFILE_PRODUCTION) &&
+                activeProfiles.contains(Constants.SPRING_PROFILE_FAST)) {
                 log.error("You have misconfigured your application! " +
                     "It should not run with both the 'prod' and 'fast' profiles at the same time.");
             }
-            if (activeProfiles.contains(Constants.SPRING_PROFILE_DEVELOPMENT) && activeProfiles.contains(Constants.SPRING_PROFILE_CLOUD)) {
+            if (activeProfiles.contains(Constants.SPRING_PROFILE_DEVELOPMENT) &&
+                activeProfiles.contains(Constants.SPRING_PROFILE_CLOUD)) {
                 log.error("You have misconfigured your application! " +
                     "It should not run with both the 'dev' and 'cloud' profiles at the same time.");
             }
@@ -68,17 +75,18 @@ public class Application {
      * Main method, used to run the application.
      */
     public static void main(String[] args) throws UnknownHostException {
-        SpringApplication app = new SpringApplication(Application.class);
+        SpringApplication app = new SpringApplication(MyBookListApplication.class);
         SimpleCommandLinePropertySource source = new SimpleCommandLinePropertySource(args);
         addDefaultProfile(app, source);
         Environment env = app.run(args).getEnvironment();
-        log.info("Access URLs:\n----------------------------------------------------------\n\t" +
-                "Local: \t\thttp://127.0.0.1:{}\n\t" +
-                "External: \thttp://{}:{}\n----------------------------------------------------------",
+        log.info("Access URLs:\n" +
+                "----------------------------------------------------------\n" +
+                "    Local:      http://127.0.0.1:{}\n" +
+                "    External:   http://{}:{}\n" +
+                "----------------------------------------------------------",
             env.getProperty("server.port"),
             InetAddress.getLocalHost().getHostAddress(),
             env.getProperty("server.port"));
-
     }
 
     /**
@@ -86,8 +94,7 @@ public class Application {
      */
     private static void addDefaultProfile(SpringApplication app, SimpleCommandLinePropertySource source) {
         if (!source.containsProperty("spring.profiles.active") &&
-                !System.getenv().containsKey("SPRING_PROFILES_ACTIVE")) {
-
+            !System.getenv().containsKey("SPRING_PROFILES_ACTIVE")) {
             app.setAdditionalProfiles(Constants.SPRING_PROFILE_DEVELOPMENT);
         }
     }

@@ -1,6 +1,6 @@
 package ru.mybooklist.web.rest;
 
-import ru.mybooklist.Application;
+import ru.mybooklist.MyBookListApplication;
 import ru.mybooklist.config.audit.AuditEventConverter;
 import ru.mybooklist.domain.PersistentAuditEvent;
 import ru.mybooklist.repository.PersistenceAuditEventRepository;
@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Application.class)
+@SpringApplicationConfiguration(classes = MyBookListApplication.class)
 @WebAppConfiguration
 @IntegrationTest
 @Transactional
