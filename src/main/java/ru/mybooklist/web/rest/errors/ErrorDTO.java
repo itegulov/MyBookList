@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class ErrorDTO implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 6526083624313360339L;
 
     private final String message;
     private final String description;

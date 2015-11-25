@@ -16,7 +16,7 @@ package ru.mybooklist.web.rest.errors;
  */
 public class CustomParameterizedException extends RuntimeException {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -2522950373597698342L;
 
     private final String message;
     private final String[] params;
