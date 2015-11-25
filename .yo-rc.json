@@ -1,8 +1,8 @@
 {
   "generator-jhipster": {
-    "baseName": "Java",
-    "packageName": "com.mycompany.myapp",
-    "packageFolder": "com/mycompany/myapp",
+    "baseName": "MyBookList",
+    "packageName": "ru.mybooklist",
+    "packageFolder": "ru/mybooklist",
     "authenticationType": "session",
     "hibernateCache": "ehcache",
     "clusteredHttpSession": "no",
