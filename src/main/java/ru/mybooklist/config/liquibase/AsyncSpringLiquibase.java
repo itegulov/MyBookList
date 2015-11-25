@@ -25,13 +25,16 @@ import liquibase.integration.spring.SpringLiquibase;
  *     But as this is a rather slow process, we use this asynchronous version to speed up our start-up time:
  *     <ul>
  *         <li>On a recent MacBook Pro, start-up time is down from 14 seconds to 8 seconds</li>
- *         <li>In production, this can help your application run on platforms like Heroku, where it must start/restart very quickly</li>
+ *         <li>
+ *             In production, this can help your application run on platforms like Heroku,
+ *             where it must start/restart very quickly
+ *         </li>
  *     </ul>
  * </p>
  */
 public class AsyncSpringLiquibase extends SpringLiquibase {
 
-    private final Logger log = LoggerFactory.getLogger(AsyncSpringLiquibase.class);
+    private static final Logger log = LoggerFactory.getLogger(AsyncSpringLiquibase.class);
 
     @Inject
     @Qualifier("taskExecutor")
