@@ -33,7 +33,7 @@ import java.util.Arrays;
 @EnableJpaRepositories("ru.mybooklist.repository")
 @EnableJpaAuditing(auditorAwareRef = "springSecurityAuditorAware")
 @EnableTransactionManagement
-@EnableElasticsearchRepositories("com.mycompany.myapp.repository.search")
+@EnableElasticsearchRepositories("ru.mybooklist.repository.search")
 public class DatabaseConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(DatabaseConfiguration.class);
