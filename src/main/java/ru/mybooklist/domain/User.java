@@ -12,11 +12,12 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.time.ZonedDateTime;
 
 /**
- * A user.
+ * A user entity.
  */
 @Entity
 @Table(name = "jhi_user")
@@ -192,25 +193,15 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-
-        if (!login.equals(user.login)) {
-            return false;
-        }
-
-        return true;
+        return Objects.equals(login, user.login);
     }
 
     @Override
     public int hashCode() {
-        return login.hashCode();
+        return Objects.hash(login);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package ru.mybooklist.domain;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,7 +13,9 @@ import java.util.Map;
  */
 @Entity
 @Table(name = "jhi_persistent_audit_event")
-public class PersistentAuditEvent {
+public class PersistentAuditEvent implements Serializable {
+
+    private static final long serialVersionUID = 3958872120826292366L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,6 +28,7 @@ public class PersistentAuditEvent {
 
     @Column(name = "event_date")
     private LocalDateTime auditEventDate;
+
     @Column(name = "event_type")
     private String auditEventType;
 

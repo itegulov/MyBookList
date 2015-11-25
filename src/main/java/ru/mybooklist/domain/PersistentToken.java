@@ -13,6 +13,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Persistent tokens are used by Spring Security to automatically log in users.
@@ -24,12 +25,11 @@ import java.io.Serializable;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class PersistentToken implements Serializable {
 
-
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("d MMMM yyyy");
 
-
-
     private static final int MAX_USER_AGENT_LEN = 255;
+
+    private static final long serialVersionUID = -589253780586226564L;
 
     @Id
     private String series;
@@ -114,25 +114,15 @@ public class PersistentToken implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         PersistentToken that = (PersistentToken) o;
-
-        if (!series.equals(that.series)) {
-            return false;
-        }
-
-        return true;
+        return Objects.equals(series, that.series);
     }
 
     @Override
     public int hashCode() {
-        return series.hashCode();
+        return Objects.hash(series);
     }
 
     @Override
