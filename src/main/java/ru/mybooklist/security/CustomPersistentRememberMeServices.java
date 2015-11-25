@@ -24,33 +24,33 @@ import java.util.Arrays;
 
 /**
  * Custom implementation of Spring Security's RememberMeServices.
- * <p/>
+ * <p>
  * Persistent tokens are used by Spring Security to automatically log in users.
- * <p/>
+ * <p>
  * This is a specific implementation of Spring Security's remember-me authentication, but it is much
  * more powerful than the standard implementations:
  * <ul>
  * <li>It allows a user to see the list of his currently opened sessions, and invalidate them</li>
- * <li>It stores more information, such as the IP address and the user agent, for audit purposes<li>
+ * <li>It stores more information, such as the IP address and the user agent, for audit purposes</li>
  * <li>When a user logs out, only his current session is invalidated, and not all of his sessions</li>
  * </ul>
- * <p/>
+ * <p>
  * This is inspired by:
  * <ul>
  * <li><a href="http://jaspan.com/improved_persistent_login_cookie_best_practice">Improved Persistent Login Cookie
  * Best Practice</a></li>
- * <li><a href="https://github.com/blog/1661-modeling-your-app-s-user-session">Github's "Modeling your App's User Session"</a></li></li>
+ * <li><a href="https://github.com/blog/1661-modeling-your-app-s-user-session">Github's "Modeling your App's
+ * User Session"</a></li>
  * </ul>
- * <p/>
+ * <p>
  * The main algorithm comes from Spring Security's PersistentTokenBasedRememberMeServices, but this class
  * couldn't be cleanly extended.
- * <p/>
+ * <p>
  */
 @Service
-public class CustomPersistentRememberMeServices extends
-    AbstractRememberMeServices {
+public class CustomPersistentRememberMeServices extends AbstractRememberMeServices {
 
-    private final Logger log = LoggerFactory.getLogger(CustomPersistentRememberMeServices.class);
+    private static final Logger log = LoggerFactory.getLogger(CustomPersistentRememberMeServices.class);
 
     // Token is valid for one month
     private static final int TOKEN_VALIDITY_DAYS = 31;
@@ -80,7 +80,7 @@ public class CustomPersistentRememberMeServices extends
     @Override
     @Transactional
     protected UserDetails processAutoLoginCookie(String[] cookieTokens, HttpServletRequest request,
-        HttpServletResponse response) {
+                                                 HttpServletResponse response) {
 
         PersistentToken token = getPersistentToken(cookieTokens);
         String login = token.getUser().getLogin();
@@ -102,8 +102,8 @@ public class CustomPersistentRememberMeServices extends
     }
 
     @Override
-    protected void onLoginSuccess(HttpServletRequest request, HttpServletResponse response, Authentication
-        successfulAuthentication) {
+    protected void onLoginSuccess(HttpServletRequest request, HttpServletResponse response,
+                                  Authentication successfulAuthentication) {
 
         String login = successfulAuthentication.getName();
 
@@ -128,7 +128,7 @@ public class CustomPersistentRememberMeServices extends
 
     /**
      * When logout occurs, only invalidate the current token, and not all user sessions.
-     * <p/>
+     * <p>
      * The standard Spring Security implementations are too basic: they invalidate all tokens for the
      * current user, so when he logs out from one browser, all his other sessions are destroyed.
      */

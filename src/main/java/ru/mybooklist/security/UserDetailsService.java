@@ -37,7 +37,7 @@ public class UserDetailsService implements org.springframework.security.core.use
                 throw new UserNotActivatedException(String.format("User %s was not activated", lowercaseLogin));
             }
             List<GrantedAuthority> grantedAuthorities = user.getAuthorities().stream()
-                    .map(authority -> new SimpleGrantedAuthority(authority.getName()))
+                .map(authority -> new SimpleGrantedAuthority(authority.getName()))
                 .collect(Collectors.toList());
             return new org.springframework.security.core.userdetails.User(lowercaseLogin,
                 user.getPassword(),
