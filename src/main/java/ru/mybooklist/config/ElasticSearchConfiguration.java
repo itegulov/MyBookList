@@ -19,7 +19,8 @@ public class ElasticSearchConfiguration {
 
     @Bean
     public ElasticsearchTemplate elasticsearchTemplate(Client client, Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder) {
-        return new ElasticsearchTemplate(client, new CustomEntityMapper(jackson2ObjectMapperBuilder.createXmlMapper(false).build()));
+        EntityMapper entityMapper = new CustomEntityMapper(jackson2ObjectMapperBuilder.createXmlMapper(false).build());
+        return new ElasticsearchTemplate(client, entityMapper);
     }
 
     public class CustomEntityMapper implements EntityMapper {

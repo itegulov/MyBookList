@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 @Profile(Constants.SPRING_PROFILE_CLOUD)
 public class CloudDatabaseConfiguration extends AbstractCloudConfig {
 
-    private final Logger log = LoggerFactory.getLogger(CloudDatabaseConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(CloudDatabaseConfiguration.class);
 
     @Bean
     public DataSource dataSource() {

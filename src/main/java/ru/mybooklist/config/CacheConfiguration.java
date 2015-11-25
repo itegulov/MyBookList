@@ -25,7 +25,7 @@ import java.util.SortedSet;
 @Profile("!" + Constants.SPRING_PROFILE_FAST)
 public class CacheConfiguration {
 
-    private final Logger log = LoggerFactory.getLogger(CacheConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(CacheConfiguration.class);
 
     @PersistenceContext
     private EntityManager entityManager;

@@ -31,7 +31,7 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter {
     private static final String PROP_METRIC_REG_JVM_FILES = "jvm.files";
     private static final String PROP_METRIC_REG_JVM_BUFFERS = "jvm.buffers";
 
-    private final Logger log = LoggerFactory.getLogger(MetricsConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(MetricsConfiguration.class);
 
     private MetricRegistry metricRegistry = new MetricRegistry();
 
@@ -72,7 +72,7 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter {
     @Profile("!" + Constants.SPRING_PROFILE_FAST)
     public static class GraphiteRegistry {
 
-        private final Logger log = LoggerFactory.getLogger(GraphiteRegistry.class);
+        private static final Logger log = LoggerFactory.getLogger(GraphiteRegistry.class);
 
         @Inject
         private MetricRegistry metricRegistry;
@@ -103,7 +103,7 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter {
     @Profile("!" + Constants.SPRING_PROFILE_FAST)
     public static class SparkRegistry {
 
-        private final Logger log = LoggerFactory.getLogger(SparkRegistry.class);
+        private static final Logger log = LoggerFactory.getLogger(SparkRegistry.class);
 
         @Inject
         private MetricRegistry metricRegistry;

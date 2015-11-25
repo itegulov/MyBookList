@@ -1,5 +1,6 @@
 package ru.mybooklist.config;
 
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import ru.mybooklist.async.ExceptionHandlingAsyncTaskExecutor;
 
 import org.slf4j.Logger;
@@ -20,7 +21,7 @@ import javax.inject.Inject;
 @EnableScheduling
 public class AsyncConfiguration implements AsyncConfigurer {
 
-    private final Logger log = LoggerFactory.getLogger(AsyncConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(AsyncConfiguration.class);
 
     @Inject
     private JHipsterProperties jHipsterProperties;
