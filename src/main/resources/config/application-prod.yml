@@ -25,7 +25,7 @@ spring:
         username: Java
         password:
     jpa:
-        database-platform: com.mycompany.myapp.domain.util.FixedPostgreSQL82Dialect
+        database-platform: ru.mybooklist.domain.util.FixedPostgreSQL82Dialect
         database: POSTGRESQL
         show_sql: false
         properties:
